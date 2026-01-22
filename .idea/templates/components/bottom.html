@@ -1,63 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Servizi</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div class="bottom">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- per gestire le grandezze-->
-
-</head>
-<body>
-
-
-
-
-<div class="grid-container">
-
-    <div class="w1">
-        <form action="{{ url_for('home') }}" method="get">
-            <button type="submit" class="testbtn1">
-                <!-- <img src="{{ url_for('static', filename='icone/home.png') }}"
-                      alt="Home" width="50" height="30">-->
+    <div class="home">
+        <form action="{{ url_for('home') }}" method="get" class="home-form">
+            <button type="submit" class="nextbtn">
+               <img src="{{ url_for('static', filename='icone/home.png') }}"
+                      alt="Home" width="50" height="30">
                 <br>Home
             </button>
         </form>
     </div>
 
 
-    <div class="w2" >
-        <form action="{{ url_for('prenotazioni') }}" method="get">
-            <button type="submit" class="testbtn1">
-                <img src="\icone\prenotazioni.png" alt="Prenotazioni" width="50" height="30">
+    <div class="prenotazioni" >
+        <form action="{{ url_for('prenotazioni') }}" method="get" class="prenotazioni-form">
+            <button type="submit" class="nextbtn">
+                <img src="{{ url_for('static', filename='icone/prenotazioni.png') }}"
+                     alt="Prenotazioni" width="50" height="30">
                 <br>Prenotazioni
 
             </button>
         </form>
     </div>
 
-    <div class="w3" >
-        <button class="testbtn1">
 
-            <br>Spazio
 
-        </button>
-    </div>
-
-    <div class="w4" >
-        <form action="{{ url_for('servizi') }}" method="get">
-            <button type="submit" class="testbtn1">
-                <img src="\icone\servizi.png" alt="Servizi" width="50" height="30">
-                <br>Servizi
-
-            </button>
-        </form>
-    </div>
-
-    <div class="w5" >
-        <form action="{{ url_for('info') }}" method="get">
-            <button type="submit" class="testbtn1">
-                <img src="\icone\info.png" alt="Info" width="50" height="30">
+    <div class="info" >
+        <form action="{{ url_for('info') }}" method="get" class="info-form">
+            <button type="submit" class="nextbtn">
+                <img src="{{ url_for('static', filename='icone/info.png') }}"
+                     alt="Info" width="50" height="30">
                 <br>Info
 
             </button>
@@ -96,7 +67,3 @@
     <button style="background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer;">🏪</button>
     <button style="background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer;">ℹ️</button>
 </nav> -->
-
-
-</body>
-</html>

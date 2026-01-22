@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appuntamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='appuntamento.css') }}">
+</head>
+<body>
+    <div class="dentist-div">
+        <form action="{{ url_for('dentist') }}" method="get" class="dentist-form">
+            <button type="submit" class="dentist-btn">
+                <img src="{{ url_for('static', filename='icone/dentista.png') }}"
+                     alt="Dentista" width="50" height="30">
+                <br>Dentista
+            </button>
+        </form>
+    </div>
+    <div class="surgeon-div">
+        <form action="{{ url_for('surgeon') }}" method="get" class="surgeon-form">
+            <button type="submit" class="surgeon-btn">
+                <img src="{{ url_for('static', filename='icone/chirurgo.png') }}"
+                     alt="Chirurgo" width="50" height="30">
+                <br>Chirurgo
+            </button>
+        </form>
+    </div>
+    <div class="hygienist-div">
+        <form action="{{ url_for('hygienist') }}" method="get" class="hygienist-form">
+            <button type="submit" class="hygienist-btn">
+                <img src="{{ url_for('static', filename='icone/igienista.png') }}"
+                     alt="Igienista" width="50" height="30">
+                <br>Igienista
+            </button>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!--<div class="prenota">
+        <form action="{{ url_for('appuntamento') }}" method="get" class="appuntamento-form">
+            <button class="prenotabtn">
+                Prenota appuntamento
+            </button>
+        </form>
+    </div>-->
+</body>
+</html>

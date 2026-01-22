@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chirurgo</title>
+</head>
+<body>
+<form action="{{ url_for('pippo') }}" method="post">
+    <button type="sumbit" name="chir_uno" class="dashboard">
+        <div class="piece-all">
+            <img
+                    src="{{ url_for('static', filename='icone/chirurgo.png') }}"
+                    alt="Estr"
+                    class="piece-image"
+            >
+
+            <div class="piece-info">
+                <span class="piece-title">
+                    Estrazione dente del giudizio
+                </span>
+            </div>
+
+            <div>
+                <span class="piece-time">
+                    30min.
+                </span>
+            </div>
+        </div>
+    </button>
+</form>
+</body>
+</html>

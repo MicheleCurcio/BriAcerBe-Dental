@@ -9,58 +9,34 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Ombra profonda */
 }
 
-.grid-container {
+.bottom {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #047b4f;
+    background-color: black;
     height: 100px;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 33% 33% 33% ;
 }
 
 body{
     background-color:lightslategrey;
 }
 
-.w1 {
-    background-color:#199FD6;
+.home, .prenotazioni, .servizi, .info, .spazio {
+    background-color: orange;
     height: 100px;
     color: white;
     text-align: center;
 }
 
-.w2 {
-    background-color:#199FD6;
-    height: 100px;
-    color: white;
-    text-align: center;
+.home-form, .prenotazioni-form, .servizi-form, .info-form{
+    height: 100%;
 }
 
-.w3 {
-    background-color:#199FD6;
-    height: 100px;
-    color: white;
-    text-align: center;
-}
-
-.w4 {
-    background-color:#199FD6;
-    height: 100px;
-    color: white;
-    text-align: center;
-}
-
-.w5 {
-    background-color:#199FD6;
-    height: 100px;
-    color: white;
-    text-align: center;
-}
-
-.testbtn1 {
-    background-color: #17e497;
+.nextbtn {
+    background-color: darkred;
     color: white;
     font-size: 15px;
     width: 100%;
@@ -71,7 +47,7 @@ body{
     cursor: pointer;
 }
 
-.testbtn1:hover {
-    background-color: red;
+.nextbtn:hover {
+    background-color: saddlebrown;
 }
 

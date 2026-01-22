@@ -3,100 +3,33 @@
 <head>
     <title>Home</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='bottom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- per gestire le grandezze-->
 
 </head>
 <body>
 
 
+<div class="prenota">
+    <form action="{{ url_for('appuntamento') }}" method="get" class="appuntamento-form">
+        <button class="prenotabtn">
+            Prenota appuntamento
+        </button>
+    </form>
+</div>
 
 
-    <div class="grid-container">
-
-        <div class="w1">
-            <form action="{{ url_for('home') }}" method="get">
-                <button type="submit" class="testbtn1">
-                   <!-- <img src="{{ url_for('static', filename='icone/home.png') }}"
-                         alt="Home" width="50" height="30">-->
-                    <br>Home
-                </button>
-            </form>
-        </div>
 
 
-        <div class="w2" >
-            <form action="{{ url_for('prenotazioni') }}" method="get">
-                <button type="submit" class="testbtn1">
-                    <img src="{{ url_for('static', filename='icone/prenotazioni.png') }}"
-                         alt="Prenotazioni" width="50" height="30">
-                    <br>Prenotazioni
-
-                </button>
-            </form>
-        </div>
-
-        <div class="w3" >
-            <button class="testbtn1">
-
-                <br>Spazio
-
-            </button>
-        </div>
-
-        <div class="w4" >
-            <form action="{{ url_for('servizi') }}" method="get">
-                <button type="submit" class="testbtn1">
-                    <img src="\icone\servizi.png" alt="Servizi" width="50" height="30">
-                    <br>Servizi
-
-                </button>
-            </form>
-        </div>
-
-        <div class="w5" >
-            <form action="{{ url_for('info') }}" method="get">
-                <button type="submit" class="testbtn1">
-                    <img src="\icone\info.png" alt="Info" width="50" height="30">
-                    <br>Info
-
-                </button>
-            </form>
-        </div>
-
-    </div>
-
-<!-- SALVATORE + -->
-<!-- <div class="glass-effect glass-card-large">
-    <div style="display: flex; align-items: center; gap: 1rem;">
-        <div style="font-size: 2rem;">✂️</div>
-        <div>
-            <h2 style="margin: 0 0 0.5rem 0;">Taglio + Shampoo</h2>
-            <p style="margin: 0; opacity: 0.9;">Dopodoamani • 09:00</p>
-        </div>
-    </div>
-</div> -->
 
 
-<!-- CARD SERVIZI -->
-<!-- <div class="glass-effect glass-card-small">
-    <h3>Servizi</h3>
-    <ul style="margin: 1rem 0 0 0; padding-left: 1.5rem;">
-        <li style="opacity: 0.9;">Barba • 7€</li>
-        <li style="opacity: 0.9;">Taglio • 12€</li>
-        <li style="opacity: 0.9;">Taglio+Barba • 17€</li>
-    </ul>
-</div> -->
 
-<!-- BOTTOM NAV GLASS -->
-<!-- <nav class="glass-effect" style="width: 100%; max-width: 400px; padding: 1rem; display: flex; justify-content: space-around;">
-    <button style="background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer;">🏠</button>
-    <button style="background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer;">📅</button>
-    <button style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 48px; height: 48px; border: none; color: white; font-size: 1.5rem; cursor: pointer;">+</button>
-    <button style="background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer;">🏪</button>
-    <button style="background: none; border: none; color: inherit; font-size: 1.2rem; cursor: pointer;">ℹ️</button>
-</nav> -->
+
+
+{% include 'components/bottom.html' %}
+
 
 
 </body>

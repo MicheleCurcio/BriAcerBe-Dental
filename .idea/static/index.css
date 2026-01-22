@@ -1,0 +1,19 @@
+.prenotabtn {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 900px;
+    width: 300px;
+    height: 70px;
+}
+
+.prenota{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prenotabtn:hover{
+    background-color:red;
+}
