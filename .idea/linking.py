@@ -1,6 +1,15 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
+
+# CONFIG DATABASE
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 @app.route("/")
 def home():
@@ -19,13 +28,13 @@ def info():
     return render_template("info.html")
 
 
-@app.route("/pippo",methods=["GET", "POST"])
-def pippo():
+@app.route("/login",methods=["GET", "POST"])
+def login():
     if request.method == "POST":
         nome = request.form.get("chir_uno")
 
         return render_template(
-            "dopo.html",
+            "login.html",
             nome=nome,
         )
     return render_template("index.html")
@@ -33,6 +42,11 @@ def pippo():
 @app.route("/appuntamento")
 def appuntamento():
     return render_template("appuntamento.html")
+
+
+@app.route('/register', methods=['GET'])
+def register():
+    return render_template("register.html")
 
 @app.route("/dentist")
 def dentist():
@@ -48,3 +62,6 @@ def hygienist():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+import models
