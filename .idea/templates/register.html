@@ -8,7 +8,7 @@
 <body>
 <div class="container">
     <h1>Registrati</h1>
-    <form action="{{ url_for('login') }}" method="post" class="login-form" >
+    <form action="{{ url_for('register') }}" method="post" class="register-form" >
 
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required>
@@ -34,7 +34,8 @@
         </div>
 
 
-
+        <label for="numerotelefono">Numero di telefono</label>
+        <input type="text" id="numerotelefono" name="numerotelefono" required>
 
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>

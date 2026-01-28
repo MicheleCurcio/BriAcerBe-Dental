@@ -1,0 +1,12 @@
+//se sta, significa che QUELLA è una progressive web application. Se non sta, è una web app.
+//LA DIFFERENZA È PROPRIO QUESTA
+{
+  "name": "BriAcerBe-Dental", //nome per gli umani
+  "short_name": "BriAcerBe-Dental", //nome per la macchina, quindi occhio a come lo scrivi
+  "lang": "en-US",
+  "start_url": "login.html", //la risorsa che viene invocata quando l'applicazione parte
+  "display": "standalone", //usa solo il display principale
+  "background_color": "white",
+  "theme_color": "white" //usato per i dispositivi che lo supportano vah Di default è o giorno (white) o notte (black)
+}
+
