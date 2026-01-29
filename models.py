@@ -1,9 +1,14 @@
-from linking import db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()  # solo istanza, NON legata all'app qui
 
 class Dottore(db.Model):
     matricola = db.Column(db.String(10), primary_key=True)
     nome = db.Column(db.String(16), nullable=False)
     ruolo = db.Column(db.String(20))  # dentista / chirurgo / igienista
+
+    #def __repr__(self):
+        #return f"<Dottore matricola={self.matricola} nome={self.nome}>"
 
 class Paziente(db.Model):
     username = db.Column(db.String(32), primary_key=True)
@@ -14,6 +19,8 @@ class Paziente(db.Model):
     sesso = db.Column(db.String(1), nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
 
+    def __repr__(self):
+        return f"<Paziente username={self.username}>"
 
 class Prenotazione(db.Model):
     scopo = db.Column(db.String(80), primary_key=True)
@@ -29,3 +36,10 @@ class Prenotazione(db.Model):
         db.ForeignKey("paziente.username"),
         primary_key=True
     )
+
+    #def __repr__(self):
+        #return (
+            #f"<Prenotazione username={self.username} "
+            #f"matricola={self.matricola} "
+            #f"data={self.data_visita}>"
+        #)

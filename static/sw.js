@@ -4,11 +4,9 @@ const CACHE_NAME = 'briacerbe-dental-v1';
 
 /* FILE STATICI DA METTERE IN CACHE */
 const filesToCache = [
-    /* ROOT */
-    '/',
-    '/index.html',
 
     /* HTML */
+    /*'/',
     'templates/appuntamento.html',
     'templates/components/bottom.html',
     'templates/dentist.html',
@@ -18,39 +16,48 @@ const filesToCache = [
     'templates/login.html',
     'templates/prenotazioni.html',
     'templates/register.html',
-    'templates/surgeon.html',
+    'templates/surgeon.html',*/
+
+    /* HTML via route Flask */
+    '/',             // corrisponde a @app.route("/")
+    '/info',         // corrisponde a @app.route("/info")
+    '/prenotazioni',
+    '/servizi',
+    '/login',
+    '/appuntamento',
+    '/register',
+    '/dentist',
+    '/surgeon',
+    '/hygienist',
 
 
     /* CSS */
-    'static/appuntamento.css',
-    'static/bottom.css',
-    'static/index.css',
-    'static/login.css',
-    'static/piece.css',
-    'static/register.css',
-
+    '/static/appuntamento.css',
+    '/static/bottom.css',
+    '/static/index.css',
+    '/static/login.css',
+    '/static/piece.css',
+    '/static/register.css',
 
 
     /* JAVASCRIPT */
-    'main.js',
+    '/static/main.js',
 
     /* IMMAGINI */
-    'static/icone_tab_bar/home_no_bg.png',
-    'static/icone_tab_bar/info_no_bg.png',
-    'static/icone_tab_bar/prenotazioni_no_bg.png',
-    'static/icone_tab_bar/servizi_no_bg.png',
+    '/static/icone_tab_bar/home_no_bg.png',
+    '/static/icone_tab_bar/info_no_bg.png',
+    '/static/icone_tab_bar/prenotazioni_no_bg.png',
 
 
-    'static/icone/chirurgo.png',
-    'static/icone/dentista.png',
-    'static/icone/igienista.png',
-    'static/icone/logo.png',
-    'static/icone/servizi.png',
-    'static/icone/sfondo-logo.png',
-    'static/icone/sfondo_appuntamento.png',
+    '/static/icone/chirurgo.png',
+    '/static/icone/dentista.png',
+    '/static/icone/igienista.png',
+    '/static/icone/logo.png',
+    '/static/icone/sfondo-logo.png',
+    '/static/icone/sfondo_appuntamento.png',
 
     /* PWA */
-    'manifest.json'
+    '/static/manifest.json'
 ];
 
 /* ===== INSTALL ===== */
