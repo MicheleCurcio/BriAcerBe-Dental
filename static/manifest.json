@@ -1,0 +1,57 @@
+{
+  "name": "BriAcerBe-Dental",
+  "short_name": "BriAcerBe-Dental",
+  "lang": "en-US",
+  "id": "/index",
+  "start_url": "/index",
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "white",
+  "icons":[
+    {
+      "src": "/static/icone/chirurgo.png",
+      "sizes": "159x159",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone/dentista.png",
+      "sizes": "170x170",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone/igienista.png",
+      "sizes": "156x156",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone/logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone/sfondo-logo.png",
+      "sizes": "1001x1001",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone/sfondo-appuntamento.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone_tab_bar/home_no_bg.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone_tab_bar/info_no_bg.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/icone_tab_bar/prenotazioni_no_bg.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ]
+}

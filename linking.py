@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
 from werkzeug.security import check_password_hash
-#from models import Paziente
+from datetime import date
+#import os
 
 app = Flask(__name__)
 
@@ -11,37 +12,32 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+#app.secret_key = os.urandom(24)  # genera attraverso import os una chiave casuale ad ogni avvio
+
+app.secret_key = "chiavesegretissima_per_prenotazioni"
+
+from models import db  # importa qui dopo aver creato l'app
+db.init_app(app)       # ⚡ importantissimo: lega l'istanza db all'app
+
 migrate = Migrate(app, db)
 
-import models
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-@app.route("/prenotazioni")
-def prenotazioni():
-    return render_template("prenotazioni.html")
-
-@app.route("/servizi")
-def servizi():
-    return render_template("servizi.html")
-
-@app.route("/info")
-def info():
-    return render_template("info.html")
+import models  # ora sicuro, senza ciclo
 
 
-@app.route("/login",methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
+# @app.route("/login",methods=["GET", "POST"])
 def login():
-    #if request.method == "POST":
-        #nome = request.form.get("chir_uno")
+    from models import Paziente
+    from models import Dottore
+    from models import Prenotazione
 
-        #return render_template(
-            #"login.html",
-            #nome=nome,
-        #)
+    #if request.method == "POST":
+    #nome = request.form.get("chir_uno")
+
+    #return render_template(
+    #"index.html",
+    #nome=nome,
+    #)
     #return render_template("index.html")
     if request.method == "POST":
         username = request.form["username"]
@@ -57,9 +53,24 @@ def login():
             return redirect(url_for("home"))
 
         # LOGIN FALLITO
-        return render_template("login.html", errore="Credenziali non valide")
+        return render_template("index.html", errore="Credenziali non valide")
 
-    return render_template("login.html")
+    return render_template("index.html")
+
+
+@app.route('/home')
+def home():
+    username = session.get('username', 'Ospite')  # se non loggato mostra "Ospite"
+    return render_template('home.html', username=username)
+
+@app.route("/prenotazioni")
+def prenotazioni():
+    return render_template("prenotazioni.html")
+
+@app.route("/info")
+def info():
+    return render_template("info.html")
+
 
 @app.route("/appuntamento")
 def appuntamento():
@@ -78,26 +89,32 @@ def register():
         sesso = request.form['sesso']
         n_telefono = request.form['numerotelefono']
         password = request.form['password']
+        confermapassword = request.form['confermapassword']
 
-        # Inserisci hash della password (consigliato)
-        from werkzeug.security import generate_password_hash
-        password_hash = generate_password_hash(password)
+        if password == confermapassword and data_di_nascita <= date.today():
+            # Inserisci hash della password (consigliato)
+            from werkzeug.security import generate_password_hash
+            password_hash = generate_password_hash(password)
 
-        # Crea oggetto Paziente
-        from models import Paziente
-        nuovo_paziente = Paziente(
-            username=username,
-            nome=nome,
-            cognome=cognome,
-            data_di_nascita=data_di_nascita,
-            sesso=sesso,
-            n_telefono=n_telefono,
-            password_hash=password_hash
-        )
-        db.session.add(nuovo_paziente)
-        db.session.commit()
+            # Crea oggetto Paziente
+            from models import Paziente
+            nuovo_paziente = Paziente(
+                username=username,
+                nome=nome,
+                cognome=cognome,
+                data_di_nascita=data_di_nascita,
+                sesso=sesso,
+                n_telefono=n_telefono,
+                password_hash=password_hash
+            )
+            db.session.add(nuovo_paziente)
+            db.session.commit()
 
-        return "Registrazione completata!"
+            return render_template('index.html')
+        else:
+            # le password non coincidono oppure ha messo una data > a quella di oggi (deve ancora nascere)
+            return render_template("register.html", errore="Password non identiche")
+
 
     return render_template('register.html')
 
