@@ -3,25 +3,35 @@
 <head>
     <title>Info</title>
     <meta charset="UTF-8">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='bottom.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='info.css') }}">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- per gestire le grandezze-->
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
 
 <div class="info-card">
-    <h1>BriAcerBe Dental</h1>
-    <p>
-        Via Salvatore Moro, 71<br>
-        Acerra (NA)
-    </p>
-</div>
 
-</body>
+    <div class="info-text">
+        <h1>BriAcerBe Dental</h1>
+        <p>
+            Via Salvatore Moro, 71<br>
+            Acerra (NA)
+        </p>
+    </div>
+
+    <img
+            src="{{ url_for('static', filename='icone/logo.png') }}"
+            alt="Logo BriAcerBe Dental"
+            class="logo-container"
+    />
+
+</div>
 
 {% include 'components/bottom.html' %}
 
+</body>
 </html>

@@ -156,8 +156,9 @@ html, body {
 
 .bottom span {
     font-size: clamp(13px, 3.5vw, 16px); /* più grande */
-    font-weight: 600;                   /* grassetto */
+    font-weight: 650;                   /* grassetto */
     line-height: 1.1;
+
 
     margin-top: -2px;                    /* lo avvicina all’icona */
     display: block;
@@ -177,3 +178,21 @@ html, body {
     -webkit-backdrop-filter: blur(20px);
 }
 */
+
+/* =========================
+   MIGLIORAMENTO VISIBILITÀ TESTO TAB BAR
+   (AGGIUNTA, NON MODIFICA)
+========================= */
+
+.bottom span {
+    color: #1f3d36; /* più contrasto sul verde */
+    text-shadow:
+            0 1px 3px rgba(255, 255, 255, 0.6),
+            0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* stato attivo più evidente */
+.bottom .active span {
+    color: #0f2e28;
+    font-weight: 750;
+}
