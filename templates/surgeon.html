@@ -9,8 +9,9 @@
 
 <body class="surgeon">
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="estrazione" class="dashboard">
+<form action="{{ url_for('sceltasurgeon') }}" method="get">
+    <input type="hidden" name="surinput" id="surinput">
+    <button type="submit" name="servizio" id="sur1"  value="estrazione" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/chirurgo.png') }}"
                  alt="Chirurgo" class="piece-image">
@@ -22,10 +23,10 @@
             <span class="piece-time">30 min</span>
         </div>
     </button>
-</form>
+<!--</form>-->
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="chirurgia2" class="dashboard">
+<!--<form action="{{ url_for('sceltasurgeon') }}" method="get">-->
+    <button type="submit" name="servizio" id="sur2"  value="chirurgia2" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/chirurgo.png') }}"
                  alt="Chirurgo" class="piece-image">
@@ -37,10 +38,10 @@
             <span class="piece-time">45 min</span>
         </div>
     </button>
-</form>
+<!--</form>-->
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="chirurgia3" class="dashboard">
+<!--<form action="{{ url_for('sceltasurgeon') }}" method="get">-->
+    <button type="submit" name="servizio" id="sur3"  value="chirurgia3" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/chirurgo.png') }}"
                  alt="Chirurgo" class="piece-image">
@@ -53,6 +54,39 @@
         </div>
     </button>
 </form>
+
+<script>
+
+
+    const sur1 = document.getElementById("sur1");
+    const sur2 = document.getElementById("sur2");
+    const sur3 = document.getElementById("sur3");
+    //const surInput = document.getElementById("sur1input") || document.getElementById("sur2input") || document.getElementById("sur3input");
+    const surInput = document.getElementById("surinput")
+
+    sur1.addEventListener("click", () => {
+
+        surInput.value = "Pulizia dei denti";
+    });
+
+
+
+    sur2.addEventListener("click", () => {
+
+        surInput.value = "Sbiancamento";
+    });
+
+
+
+    sur3.addEventListener("click", () => {
+
+        surInput.value = "Controllo";
+    });
+
+
+
+
+</script>
 
 </body>
 </html>

@@ -1,17 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
+import re
+
 
 db = SQLAlchemy()  # solo istanza, NON legata all'app qui
 
-class Dottore(db.Model):
-    matricola = db.Column(db.String(10), primary_key=True)
-    nome = db.Column(db.String(16), nullable=False)
-    ruolo = db.Column(db.String(20))  # dentista / chirurgo / igienista
-
-    #def __repr__(self):
-        #return f"<Dottore matricola={self.matricola} nome={self.nome}>"
-
 class Paziente(db.Model):
-    username = db.Column(db.String(32), primary_key=True)
+    username = db.Column(db.String(64), primary_key=True)
     nome = db.Column(db.String(16), nullable=False)
     cognome = db.Column(db.String(16), nullable=False)
     data_di_nascita = db.Column(db.Date, nullable=False)
@@ -19,27 +14,32 @@ class Paziente(db.Model):
     sesso = db.Column(db.String(1), nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
 
-    def __repr__(self):
-        return f"<Paziente username={self.username}>"
+    @validates("n_telefono")
+    def valida_telefono(self, key, numero):
+        if not (numero.isdigit() and len(numero) == 10):
+            raise ValueError("Numero di telefono non valido")
+        return numero
 
 class Prenotazione(db.Model):
-    scopo = db.Column(db.String(80), primary_key=True)
-    data_richiesta_pren = db.Column(db.Date, primary_key=True)
+    scopo = db.Column(db.String(80), nullable=False)
+
+    data_richiesta_pren = db.Column(db.Date, nullable=False)
+
     data_visita = db.Column(db.Date, primary_key=True)
-    matricola = db.Column(
-        db.String(10),
-        db.ForeignKey("dottore.matricola"),
-        primary_key=True
-    )
+    ora_visita = db.Column(db.Integer, primary_key=True)
+    matricola = db.Column(db.String(10), primary_key=True)
+
     username = db.Column(
-        db.String(32),
-        db.ForeignKey("paziente.username"),
-        primary_key=True
+        db.String(64),
+        db.ForeignKey("paziente.username")
     )
 
-    #def __repr__(self):
-        #return (
-            #f"<Prenotazione username={self.username} "
-            #f"matricola={self.matricola} "
-            #f"data={self.data_visita}>"
-        #)
+    __table_args__ = (
+        db.UniqueConstraint(
+            'username',
+            'data_visita',
+            'ora_visita',
+            name='uq_prenotazione_user_data_ora'
+        ),
+    )
+

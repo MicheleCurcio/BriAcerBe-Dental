@@ -4,6 +4,9 @@ from flask_migrate import Migrate
 from datetime import datetime
 from werkzeug.security import check_password_hash
 from datetime import date
+from flask import jsonify
+from sqlalchemy.orm import validates
+from sqlalchemy.exc import IntegrityError
 #import os
 
 app = Flask(__name__)
@@ -28,7 +31,7 @@ import models  # ora sicuro, senza ciclo
 # @app.route("/login",methods=["GET", "POST"])
 def login():
     from models import Paziente
-    from models import Dottore
+    #from models import Dottore
     from models import Prenotazione
 
     #if request.method == "POST":
@@ -65,7 +68,16 @@ def home():
 
 @app.route("/prenotazioni")
 def prenotazioni():
-    return render_template("prenotazioni.html")
+    username = session.get("username")
+
+    from models import Prenotazione
+
+    # tutte le prenotazioni di legate a quell'utente
+    prenotazioni = Prenotazione.query.filter_by(
+        username=username
+    ).all()
+
+    return render_template("prenotazioni.html", prenotazioni=prenotazioni)
 
 @app.route("/info")
 def info():
@@ -107,10 +119,22 @@ def register():
                 n_telefono=n_telefono,
                 password_hash=password_hash
             )
-            db.session.add(nuovo_paziente)
-            db.session.commit()
 
-            return render_template('index.html')
+            try:
+                db.session.add(nuovo_paziente)
+                db.session.commit()
+                #flash("Registrazione avvenuta con successo")
+                return render_template('index.html')
+            except ValueError as e:       # intercetta l'errore lanciato dal model
+                db.session.rollback()     # molto importante, altrimenti sessione sporca
+                #flash(str(e))
+                return redirect(url_for("register"))
+            except Exception as e:        # intercetta eventuali altri errori di DB
+                db.session.rollback()
+                #flash("Errore nel database: " + str(e))
+                return redirect(url_for("register"))
+
+
         else:
             # le password non coincidono oppure ha messo una data > a quella di oggi (deve ancora nascere)
             return render_template("register.html", errore="Password non identiche")
@@ -129,6 +153,106 @@ def surgeon():
 @app.route("/hygienist")
 def hygienist():
     return render_template("hygienist.html")
+
+@app.route("/sceltadentist")
+def sceltadentist():
+    deninput = request.args.get("deninput")
+    username = session.get("username")
+    return render_template("sceltadentist.html", deninput=deninput, username=username)
+
+@app.route("/sceltahygienist")
+def sceltahygienist():
+    hyginput = request.args.get("hyginput")
+    username = session.get("username")
+    return render_template("sceltahygienist.html", hyginput=hyginput, username=username)
+
+@app.route("/sceltasurgeon")
+def sceltasurgeon():
+    surinput = request.args.get("surinput")
+    username = session.get("username")
+    return render_template("sceltasurgeon.html", surinput=surinput, username=username)
+
+@app.route("/conferma")
+def conferma():
+    scopo = request.args.get("scopo")
+
+    ora_visita = request.args.get("ore", type=int)
+
+    matricola = request.args.get("matricola")
+
+    giorno_str = request.args.get("giorno")  # "2026-02-09" || "2026-02-10" || "2026-02-11"
+    giorno = datetime.strptime(giorno_str, "%Y-%m-%d").date() # lo adatta al tipo di dato date per il database
+
+    oggi = date.today()
+
+    username = session.get("username")
+
+    from models import Prenotazione
+    nuova_prenotazione = Prenotazione(
+        scopo = scopo,
+        data_richiesta_pren = oggi,
+        data_visita = giorno,
+        ora_visita = ora_visita,
+        matricola = matricola,
+        username = username
+    )
+    try:
+        db.session.add(nuova_prenotazione)
+        db.session.commit()
+    except IntegrityError as e:
+        db.session.rollback()
+        errore = "Errore di prenotazione"  # fallback
+        msg = str(e.orig) # messaggio del DB
+        # print(msg)
+
+        if all(k in msg for k in ["username", "data_visita", "ora_visita"]):
+            errore = "Una persona non deve fare due visite contemporaneamente"
+        elif all(k in msg for k in ["matricola", "data_visita", "ora_visita"]):
+            errore = "Un medico non deve fare due visite contemporaneamente"
+        else:
+            errore = "Errore nella prenotazione"
+        return render_template("conferma.html", errore=errore, msg=msg)
+
+    return render_template("conferma.html")
+
+
+from flask import jsonify
+
+@app.route("/api/disponibilita-orari")
+def disponibilita_orari():
+    from models import Prenotazione
+
+    matricola = request.args.get("matricola")
+    giorno_str = request.args.get("giorno")
+
+    if not matricola or not giorno_str:
+        return jsonify({"ok": False}), 400
+
+    giorno = datetime.strptime(giorno_str, "%Y-%m-%d").date()
+
+    # tutte le prenotazioni di quell'igienista in quel giorno
+    prenotazioni = Prenotazione.query.filter_by(
+        matricola=matricola,
+        data_visita=giorno
+    ).all()
+
+    # ore già occupate
+    ore_occupate = [p.ora_visita for p in prenotazioni]
+
+    # ore possibili
+    ore_possibili = [16, 17, 18]
+
+    # ore disponibili
+    ore_disponibili = [o for o in ore_possibili if o not in ore_occupate]
+
+    return jsonify({
+        "ok": True,
+        "ore_disponibili": ore_disponibili
+    })
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
