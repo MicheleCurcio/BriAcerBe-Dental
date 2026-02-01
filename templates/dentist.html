@@ -9,8 +9,9 @@
 
 <body class="dentista">
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="otturazione" class="dashboard">
+<form action="{{ url_for('sceltadentist') }}" method="get">
+    <input type="hidden" name="deninput" id="deninput">
+    <button type="submit" name="servizio" id="den1" value="otturazione" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/dentista.png') }}"
                  alt="Dentista" class="piece-image">
@@ -22,10 +23,10 @@
             <span class="piece-time">30 min</span>
         </div>
     </button>
-</form>
+<!--</form>-->
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="impianto" class="dashboard">
+<!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
+    <button type="submit" name="servizio" id="den2" value="impianto" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/dentista.png') }}"
                  alt="Dentista" class="piece-image">
@@ -37,10 +38,10 @@
             <span class="piece-time">45 min</span>
         </div>
     </button>
-</form>
+<!--</form>-->
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="controllo" class="dashboard">
+<!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
+    <button type="submit" name="servizio" id="den3" value="controllo" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/dentista.png') }}"
                  alt="Dentista" class="piece-image">
@@ -53,6 +54,39 @@
         </div>
     </button>
 </form>
+
+<script>
+
+
+    const den1 = document.getElementById("den1");
+    const den2 = document.getElementById("den2");
+    const den3 = document.getElementById("den3");
+    //const hygInput = document.getElementById("hyg1input") || document.getElementById("hyg2input") || document.getElementById("hyg3input");
+    const denInput = document.getElementById("deninput")
+
+    den1.addEventListener("click", () => {
+
+        denInput.value = "Pulizia dei denti";
+    });
+
+
+
+    den2.addEventListener("click", () => {
+
+        denInput.value = "Sbiancamento";
+    });
+
+
+
+    den3.addEventListener("click", () => {
+
+        denInput.value = "Controllo";
+    });
+
+
+
+
+</script>
 
 </body>
 </html>

@@ -9,8 +9,10 @@
 
 <body class="igienista">
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="pulizia" class="dashboard">
+<form action="{{ url_for('sceltahygienist') }}" method="get">
+    <input type="hidden" name="hyginput" id="hyginput">
+<!--    <input type="hidden" name="hyg1input" id="hyg1input">-->
+    <button type="submit" name="servizio" id="hyg1" value="pulizia" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/igienista.png') }}"
                  alt="Igienista" class="piece-image">
@@ -22,10 +24,11 @@
             <span class="piece-time">15 min</span>
         </div>
     </button>
-</form>
+<!--</form>-->
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="sbiancamento" class="dashboard">
+<!--<form action="{{ url_for('sceltahygienist') }}" method="get">-->
+<!--    <input type="hidden" name="hyg2input" id="hyg2input">-->
+    <button type="submit" name="servizio" id="hyg2" value="sbiancamento" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/igienista.png') }}"
                  alt="Igienista" class="piece-image">
@@ -37,10 +40,11 @@
             <span class="piece-time">30 min</span>
         </div>
     </button>
-</form>
+<!--</form>-->
 
-<form action="{{ url_for('pippo') }}" method="post">
-    <button type="submit" name="servizio" value="controllo" class="dashboard">
+<!--<form action="{{ url_for('sceltahygienist') }}" method="get">-->
+<!--    <input type="hidden" name="hyg3input" id="hyg3input">-->
+    <button type="submit" name="servizio" id="hyg3" value="controllo" class="dashboard">
         <div class="piece-all">
             <img src="{{ url_for('static', filename='icone/igienista.png') }}"
                  alt="Igienista" class="piece-image">
@@ -53,6 +57,39 @@
         </div>
     </button>
 </form>
+
+<script>
+
+
+    const hyg1 = document.getElementById("hyg1");
+    const hyg2 = document.getElementById("hyg2");
+    const hyg3 = document.getElementById("hyg3");
+    //const hygInput = document.getElementById("hyg1input") || document.getElementById("hyg2input") || document.getElementById("hyg3input");
+    const hygInput = document.getElementById("hyginput")
+
+    hyg1.addEventListener("click", () => {
+
+        hygInput.value = "Pulizia dei denti";
+    });
+
+
+
+    hyg2.addEventListener("click", () => {
+
+        hygInput.value = "Sbiancamento";
+    });
+
+
+
+    hyg3.addEventListener("click", () => {
+
+        hygInput.value = "Controllo";
+    });
+
+
+
+
+</script>
 
 </body>
 </html>

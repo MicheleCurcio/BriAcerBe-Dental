@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scelta Chirurgo</title>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='scelta.css') }}">
+</head>
+<body>
+
+<style>
+
+    .selected {
+        background-color: red;
+        color: blue;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+</style>
+
+
+<body>
+
+<!-- <h1>Hai selezionato: {{ hyg3input }}</h1> -->
+
+<button type="button" id="luigi">Luigi</button>
+<button type="button" id="domenico">Domenico</button>
+
+<button type="button" id="giornouno">Lunedì 9 Febbraio</button>
+<button type="button" id="giornodue">Martedì 10 Febbraio</button>
+<button type="button" id="giornotre">Mercoledì 11 Febbraio</button>
+
+<button type="button" id="oresedici">16:00</button>
+<button type="button" id="orediciassette">17:00</button>
+<button type="button" id="orediciotto">18:00</button>
+
+<form action="{{ url_for('conferma') }}" method="get">
+    <input type="hidden" name="scopo" id="scopoInput">
+    <input type="hidden" name="matricola" id="matricola">
+    <input type="hidden" name="giorno" id="giorno">
+    <input type="hidden" name="ore" id="oreInput">
+    <button type="submit" class="conferma">
+        Conferma
+    </button>
+</form>
+
+
+<script>
+    const luigi = document.getElementById("luigi");
+    const domenico = document.getElementById("domenico");
+    const matricolaInput = document.getElementById("matricola");
+
+
+    const giornouno = document.getElementById("giornouno");
+    const giornodue = document.getElementById("giornodue");
+    const giornotre = document.getElementById("giornotre");
+    const giornoInput = document.getElementById("giorno");
+
+
+    const oresedici = document.getElementById("oresedici");
+    const orediciassette = document.getElementById("orediciassette");
+    const orediciotto = document.getElementById("orediciotto");
+    const oreInput = document.getElementById("oreInput");
+
+
+    const tipoVisita = "{{ surinput }}";
+    document.getElementById("scopoInput").value = tipoVisita;
+
+    oresedici.addEventListener("click", () => {
+        oresedici.classList.add("selected");
+        orediciassette.classList.remove("selected");
+        orediciotto.classList.remove("selected");
+
+        oreInput.value = 16;
+    });
+
+    orediciassette.addEventListener("click", () => {
+        oresedici.classList.remove("selected");
+        orediciassette.classList.add("selected");
+        orediciotto.classList.remove("selected");
+
+        oreInput.value = 17;
+    });
+
+    orediciotto.addEventListener("click", () => {
+        oresedici.classList.remove("selected");
+        orediciassette.classList.remove("selected");
+        orediciotto.classList.add("selected");
+
+        oreInput.value = 18;
+    });
+
+
+    luigi.addEventListener("click", () => {
+        luigi.classList.add("selected");
+        domenico.classList.remove("selected");
+
+        matricolaInput.value = "0124003056";
+
+        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.ok) return;
+
+                // reset
+                oresedici.classList.add("hidden");
+                orediciassette.classList.add("hidden");
+                orediciotto.classList.add("hidden");
+
+                // mostra solo quelli disponibili
+                if (data.ore_disponibili.includes(16)) {
+                    oresedici.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(17)) {
+                    orediciassette.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(18)) {
+                    orediciotto.classList.remove("hidden");
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+    domenico.addEventListener("click", () => {
+        domenico.classList.add("selected");
+        luigi.classList.remove("selected");
+
+        matricolaInput.value = "0124003024";
+
+        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.ok) return;
+
+                // reset
+                oresedici.classList.add("hidden");
+                orediciassette.classList.add("hidden");
+                orediciotto.classList.add("hidden");
+
+                // mostra solo quelli disponibili
+                if (data.ore_disponibili.includes(16)) {
+                    oresedici.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(17)) {
+                    orediciassette.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(18)) {
+                    orediciotto.classList.remove("hidden");
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+    giornouno.addEventListener("click", () => {
+        giornouno.classList.add("selected");
+        giornodue.classList.remove("selected");
+        giornotre.classList.remove("selected");
+
+        giornoInput.value = "2026-02-09";
+
+        if (!matricolaInput.value) {
+            alert("Seleziona prima un chirurgo");
+            return;
+        }
+
+        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.ok) return;
+
+                // reset
+                oresedici.classList.add("hidden");
+                orediciassette.classList.add("hidden");
+                orediciotto.classList.add("hidden");
+
+                // mostra solo quelli disponibili
+                if (data.ore_disponibili.includes(16)) {
+                    oresedici.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(17)) {
+                    orediciassette.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(18)) {
+                    orediciotto.classList.remove("hidden");
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+
+    giornodue.addEventListener("click", () => {
+        giornouno.classList.remove("selected");
+        giornodue.classList.add("selected");
+        giornotre.classList.remove("selected");
+
+        giornoInput.value = "2026-02-10";
+
+        if (!matricolaInput.value) {
+            alert("Seleziona prima un chirurgo");
+            return;
+        }
+
+        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.ok) return;
+
+                // reset
+                oresedici.classList.add("hidden");
+                orediciassette.classList.add("hidden");
+                orediciotto.classList.add("hidden");
+
+                // mostra solo quelli disponibili
+                if (data.ore_disponibili.includes(16)) {
+                    oresedici.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(17)) {
+                    orediciassette.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(18)) {
+                    orediciotto.classList.remove("hidden");
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+    giornotre.addEventListener("click", () => {
+        giornouno.classList.remove("selected");
+        giornodue.classList.remove("selected");
+        giornotre.classList.add("selected");
+
+        giornoInput.value = "2026-02-11";
+
+        if (!matricolaInput.value) {
+            alert("Seleziona prima un chirurgo");
+            return;
+        }
+
+        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.ok) return;
+
+                // reset
+                oresedici.classList.add("hidden");
+                orediciassette.classList.add("hidden");
+                orediciotto.classList.add("hidden");
+
+                // mostra solo quelli disponibili
+                if (data.ore_disponibili.includes(16)) {
+                    oresedici.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(17)) {
+                    orediciassette.classList.remove("hidden");
+                }
+                if (data.ore_disponibili.includes(18)) {
+                    orediciotto.classList.remove("hidden");
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+    document.querySelector(".conferma").addEventListener("click", (e) => {
+        if (!matricolaInput.value || !giornoInput.value || !oreInput.value) {
+            e.preventDefault();
+            alert("Seleziona chirurgo, giorno e ora prima di confermare");
+        }
+    });
+
+</script>
+
+</body>
+</html>

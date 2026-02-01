@@ -12,6 +12,13 @@
 <body>
 
 
+<ul>
+    {% for p in prenotazioni %}
+    <li>{{ p.scopo }} {{ p.data_visita }} {{ p.ora_visita }} {{ p.matricola }}</li>
+    {% endfor %}
+</ul>
+
+
 {% include 'components/bottom.html' %}
 
 
