@@ -20,16 +20,12 @@
 </span>
 
 <!-- LOGOUT BUTTON -->
+<form action="{{ url_for('logout') }}" method="get" class="logout-form">
+    <button class="logout-btn" aria-label="Logout">
+        <img src="{{ url_for('static', filename='icone/logout.png') }}" alt="Logout" class="logout-icon">
 
-<button class="logout-btn" aria-label="Logout">
-
-    <img
-            src="{{ url_for('static', filename='icone/logout.png') }}"
-            alt="Logout"
-            class="logout-icon"
-    >
-</button>
-
+    </button>
+</form>
 
 <!-- CTA CENTRALE -->
 <div class="prenota">

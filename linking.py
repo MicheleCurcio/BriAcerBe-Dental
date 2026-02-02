@@ -60,6 +60,13 @@ def login():
 
     return render_template("index.html")
 
+@app.route("/logout")
+def logout():
+    # Rimuove il username dalla sessione, se esiste
+    session.pop("username", None)
+
+    # Reindirizza alla pagina di login
+    return redirect(url_for("login"))
 
 @app.route('/home')
 def home():
