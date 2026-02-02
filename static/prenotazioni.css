@@ -1,0 +1,103 @@
+/* =========================
+   BASE / FIX SCROLL
+========================= */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* NON tocchiamo bottom.css */
+/* Il body NON deve essere flex qui */
+
+body {
+    background-image: url("/static/icone/sfondo_appuntamento.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #222;
+
+    /* QUESTO È IL FIX DELLO SCROLL */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* =========================
+   LISTA PRENOTAZIONI
+========================= */
+
+.prenotazioni-list {
+    list-style: none;
+    margin: 0 auto;
+    padding: 160px 16px 140px; /* spazio top + spazio bottom bar */
+
+    max-width: 420px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =========================
+   CARD PRENOTAZIONE
+========================= */
+
+.prenotazione-card {
+    position: relative;
+
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 22px;
+    padding: 20px 20px 20px 26px;
+
+    box-shadow:
+            0 12px 28px rgba(0,0,0,0.18),
+            0 0 0 1px rgba(0,0,0,0.05);
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* linea laterale stile appuntamento */
+.prenotazione-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 6px;
+    border-radius: 999px;
+    background-color: lightseagreen;
+}
+
+/* =========================
+   RIGHE
+========================= */
+
+.prenotazione-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* titolo / scopo */
+.prenotazione-row.titolo {
+    font-size: 18px;
+    font-weight: 650;
+    margin-bottom: 6px;
+}
+
+/* label */
+.label {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+/* valore */
+.value {
+    font-size: 15px;
+    font-weight: 600;
+}

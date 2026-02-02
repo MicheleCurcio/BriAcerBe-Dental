@@ -5,9 +5,19 @@
     <title>Appuntamento</title>
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='appuntamento.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
+
 </head>
 <body>
 <h1 class="scelta">Seleziona lo specialista:</h1>
+
+<div class="back-div">
+    <form action="{{ url_for('home') }}" method="get">
+        <button type="submit" class="home-btn">
+            <--
+        </button>
+    </form>
+</div>
 
 <div class="dentist-div">
     <form action="{{ url_for('dentist') }}" method="get">

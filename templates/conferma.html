@@ -1,16 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>Conferma</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='conferma.css') }}">
 </head>
 <body>
-    Schermata di Conferma
+
+<div class="confirm-card">
 
     {% if errore %}
-    <div class="alert">{{ errore }}</div>
+
+        <div class="alert">{{ errore }}</div>
+        <form action="{{ url_for('prenotazioni') }}" method="get">
+            <button type="submit" class="prenotazioni-button">
+                Visualizza le tue prenotazioni
+            </button>
+        </form>
+
+    {% else %}
+
+        <div class="confirm-icon">✓</div>
+
+        <div class="confirm-title">
+            Prenotazione confermata
+        </div>
+
+        <div class="confirm-text">
+            La tua prenotazione è stata registrata correttamente.
+        </div>
+
+        <form action="{{ url_for('home') }}" method="get">
+            <button type="submit" class="home-button">
+                Torna alla home
+            </button>
+        </form>
+
     {% endif %}
-    <!-- <div class="alert">{{ msg }}</div> -->
+
+</div>
 
 </body>
 </html>

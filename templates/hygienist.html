@@ -5,9 +5,20 @@
     <title>Igienista</title>
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
+
 </head>
 
 <body class="igienista">
+<h2>Seleziona una tipologia di visita:</h2>
+
+<div class="back-div">
+    <form action="{{ url_for('appuntamento') }}" method="get">
+        <button type="submit" class="appuntamento-btn">
+            <--
+        </button>
+    </form>
+</div>
 
 <form action="{{ url_for('sceltahygienist') }}" method="get">
     <input type="hidden" name="hyginput" id="hyginput">
