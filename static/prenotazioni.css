@@ -79,9 +79,15 @@ body {
 
 .prenotazione-row {
     display: flex;
+    align-items: center;
+    gap: 8px; /* distanza tra label, value e pulsante */
+}
+
+/*.prenotazione-row {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-}
+}*/
 
 /* titolo / scopo */
 .prenotazione-row.titolo {
@@ -100,4 +106,20 @@ body {
 .value {
     font-size: 15px;
     font-weight: 600;
+}
+
+.delete-btn {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 12px; /* spazio tra value e pulsante */
+    transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #e60000;
 }

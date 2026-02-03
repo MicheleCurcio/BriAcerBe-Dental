@@ -12,7 +12,7 @@ html, body {
 ========================= */
 
 body {
-    min-height: 100vh;
+    /*min-height: 100vh;*/
 
     background-image: url("/static/icone/sfondo-logo.png");
     background-repeat: no-repeat;
@@ -29,10 +29,14 @@ body {
 ========================= */
 
 .prenota {
-    min-height: 50vh;
+    /*min-height: 50vh;*/
+    /*bottom: 50%;*/
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    top: 45%; /* spostamento verso il basso */
+
 }
 
 /* =========================

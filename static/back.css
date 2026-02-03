@@ -1,3 +1,14 @@
-.back-div{
-    background-color: red;
+.back-div {
+    background-color: brown;
+    color: red;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 75px;
+    height: 75px;
+}
+
+.back-btn {
+    width: 75px;
+    height: 75px;
 }

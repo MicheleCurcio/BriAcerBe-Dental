@@ -10,63 +10,64 @@
 </head>
 
 <body class="dentista">
-<h2>Seleziona una tipologia di visita:</h2>
+
 
 <div class="back-div">
     <form action="{{ url_for('appuntamento') }}" method="get">
-        <button type="submit" class="appuntamento-btn">
+        <button type="submit" class="back-btn">
             <--
         </button>
     </form>
 </div>
 
+<div class="container-all">
+    <h2>Seleziona una tipologia di visita:</h2>
+    <form action="{{ url_for('sceltadentist') }}" method="get">
+        <input type="hidden" name="deninput" id="deninput">
+        <button type="submit" name="servizio" id="den1" value="otturazione" class="dashboard">
+            <div class="piece-all">
+                <img src="{{ url_for('static', filename='icone/dentista.png') }}"
+                     alt="Dentista" class="piece-image">
 
-<form action="{{ url_for('sceltadentist') }}" method="get">
-    <input type="hidden" name="deninput" id="deninput">
-    <button type="submit" name="servizio" id="den1" value="otturazione" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/dentista.png') }}"
-                 alt="Dentista" class="piece-image">
+                <div class="piece-info">
+                    <span class="piece-title">Otturazione</span>
+                </div>
 
-            <div class="piece-info">
-                <span class="piece-title">Otturazione</span>
+                <span class="piece-time">30 min</span>
             </div>
+        </button>
+    <!--</form>-->
 
-            <span class="piece-time">30 min</span>
-        </div>
-    </button>
-<!--</form>-->
+    <!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
+        <button type="submit" name="servizio" id="den2" value="impianto" class="dashboard">
+            <div class="piece-all">
+                <img src="{{ url_for('static', filename='icone/dentista.png') }}"
+                     alt="Dentista" class="piece-image">
 
-<!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
-    <button type="submit" name="servizio" id="den2" value="impianto" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/dentista.png') }}"
-                 alt="Dentista" class="piece-image">
+                <div class="piece-info">
+                    <span class="piece-title">Impianto</span>
+                </div>
 
-            <div class="piece-info">
-                <span class="piece-title">Impianto</span>
+                <span class="piece-time">45 min</span>
             </div>
+        </button>
+    <!--</form>-->
 
-            <span class="piece-time">45 min</span>
-        </div>
-    </button>
-<!--</form>-->
+    <!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
+        <button type="submit" name="servizio" id="den3" value="controllo" class="dashboard">
+            <div class="piece-all">
+                <img src="{{ url_for('static', filename='icone/dentista.png') }}"
+                     alt="Dentista" class="piece-image">
 
-<!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
-    <button type="submit" name="servizio" id="den3" value="controllo" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/dentista.png') }}"
-                 alt="Dentista" class="piece-image">
+                <div class="piece-info">
+                    <span class="piece-title">Controllo</span>
+                </div>
 
-            <div class="piece-info">
-                <span class="piece-title">Controllo</span>
+                <span class="piece-time">20 min</span>
             </div>
-
-            <span class="piece-time">20 min</span>
-        </div>
-    </button>
-</form>
-
+        </button>
+    </form>
+</div>
 <script>
 
 

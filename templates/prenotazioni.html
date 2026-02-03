@@ -30,38 +30,66 @@
 
 </style>
 <body>
-{% if prenotazioni|length == 0 %}
-<div class="empty-state">
-    <p>Nessuna prenotazione</p>
-</div>
-{% else %}
-<ul class="prenotazioni-list">
-    {% for p in prenotazioni %}
-    <li class="prenotazione-card">
+    {% if prenotazioni|length == 0 %}
+    <div class="empty-state">
+        <p>Nessuna prenotazione</p>
+    </div>
+    {% else %}
+    <ul class="prenotazioni-list">
+        {% for p in prenotazioni %}
+        <li class="prenotazione-card">
 
-        <div class="prenotazione-row titolo">
-            {{ p.scopo }}
-        </div>
+            <div class="prenotazione-row titolo">
+                {{ p.scopo }}
+            </div>
 
-        <div class="prenotazione-row">
-            <span class="label">Giorno</span>
-            <span class="value">{{ p.data_visita | data_it }}</span>
-        </div>
+            <div class="prenotazione-row">
+                <span class="label">Giorno:</span>
+                <span class="value">{{ p.data_visita | data_it }}</span>
+            </div>
 
-        <div class="prenotazione-row">
-            <span class="label">Orario</span>
-            <span class="value">{{ "%02d:00"|format(p.ora_visita) }}</span>
-        </div>
+            <div class="prenotazione-row">
+                <span class="label">Orario:</span>
+                <span class="value">{{ "%02d:00"|format(p.ora_visita) }}</span>
+            </div>
 
-        <div class="prenotazione-row">
-            <span class="label">Matricola</span>
-            <span class="value">{{ p.matricola }}</span>
-        </div>
+            <div class="prenotazione-row">
+                <span class="label">Medico:</span>
+                <span class="value">
+                    {% if p.matricola == "0124002974" %}
+                        Antonio
+                    {% elif p.matricola == "0124002966" %}
+                        Michele
+                    {% elif p.matricola == "0124003081" %}
+                        Salvatore
+                    {% elif p.matricola == "0124002915" %}
+                        Gaetano
+                    {% elif p.matricola == "0124003056" %}
+                        Luigi
+                    {% elif p.matricola == "0124003024" %}
+                        Domenico
+                    {% else %}
+                        Sconosciuto
+                    {% endif %}
+                </span>
+            </div>
 
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+            <!-- Pulsante cestino -->
+            <div class="cestino-wrapper">
+                <form action="{{ url_for('cancella') }}" method="post">
+                    <!-- essendo un for, meglio passare giorno e ora in questo modo senza aiuto del JS -->
+                    <input type="hidden" name="giorno" value="{{ p.data_visita }}">
+                    <input type="hidden" name="ore" value="{{ p.ora_visita }}">
+                    <button class="delete-btn">
+                        Cancella prenotazione
+                    </button>
+                </form>
+            </div>
+
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
 
 
@@ -69,7 +97,14 @@
 {% include 'components/bottom.html' %}
 
 
+<script>
 
+    const giornoInput = document.getElementById("giorno");
+    const oreInput = document.getElementById("oreInput");
+
+
+
+</script>
 
 
 

@@ -225,6 +225,28 @@ def disponibilita_orari():
 
     return jsonify({"ok": True, "ore_disponibili": ore_disponibili})
 
+@app.route('/cancella', methods=['POST'])
+def cancella():
+    from models import Prenotazione
+
+    ora_visita =  request.form.get("ore", type=int)
+
+    giorno = datetime.strptime(
+        request.form.get("giorno"), "%Y-%m-%d"
+    ).date()
+
+    username = session.get("username")
+
+    # cancella dal DB
+    cestino = Prenotazione.query.filter_by(data_visita=giorno, ora_visita=ora_visita, username=username).all()
+
+    for c in cestino:
+        db.session.delete(c)
+    db.session.commit()
+
+    return redirect(url_for("prenotazioni"))
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
