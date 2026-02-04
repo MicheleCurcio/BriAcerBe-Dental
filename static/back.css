@@ -1,19 +1,21 @@
+/* gestione del tasto undo */
 .back-div {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
+    position: fixed; /* posiziona il contenitore fisso sullo schermo, anche se scrolli la pagina */
+    top: 1.25rem; /* 20px / 16 */
+    left: 1.25rem; /* 20px / 16 */
+    z-index: 100; /* metti il contenitore sopra altri elementi */
 }
 
+/* gestione del pulsante undo */
 .back-btn {
-    width: 50px;
-    height: 50px;
+    width: 3.125rem; /* 50px /16 */
+    height: 3.125rem; /* 50px /16 */
 
     border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 0.0625rem solid rgba(0, 0, 0, 0.08); /* 1px /16 */
 
     background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(0.375rem); /* 6px /16 */
 
     display: flex;
     align-items: center;
@@ -21,35 +23,36 @@
 
     cursor: pointer;
 
-    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    /* gestione delle ombre del pulsante */
+    box-shadow: 0 0.375rem 1rem rgba(0,0,0,0.18); /* 6px 16px /16 */
 
+    /* gestione delle animazioni del pulsante */
     transition:
             transform 0.15s ease,
             box-shadow 0.15s ease,
             background-color 0.2s ease;
 }
 
+/* gestione del pulsante undo quando ci passi sopra */
 .back-btn:hover {
     background-color: lightseagreen;
-    transform: scale(1.05);
-    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+    transform: scale(1.05); /* gestisce la dimensione in scala */
+    box-shadow: 0 0.625rem 1.5rem rgba(0,0,0,0.25); /* 10px 24px /16 */
 }
 
+/* seleziona il pulsante solo nel momento in cui vengono premuti */
 .back-btn:active {
     transform: scale(0.95);
 }
 
+/* gestione delle immagini dei pulsanti */
 .back-icon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+    width: 2.5rem; /* 40px /16 */
+    height: 2.5rem; /* 40px /16 */
+    object-fit: contain; /* mantieni tutta l’immagine visibile dentro questo box */
 }
 
-
-/* =========================
-   TOOLTIP BACK BUTTON
-========================= */
-
+/* crea un elemento finto DOPO il contenuto dell’elemento */
 .back-btn::after {
     content: "Pagina precedente";
 
@@ -59,24 +62,27 @@
 
     transform: translateY(-50%);
 
-    padding: 6px 10px;
+    padding: 0.375rem 0.625rem; /* 6px 10px /16 */
 
     background: rgba(0, 0, 0, 0.75);
     color: white;
 
-    font-size: 0.75rem;
-    white-space: nowrap;
+    font-size: 0.75rem; /* già in rem, ok */
+    white-space: nowrap; /* impedisce al testo di andare a capo */
 
-    border-radius: 8px;
+    border-radius: 0.5rem; /* 8px /16 */
 
     opacity: 0;
     pointer-events: none;
 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    /* gestione delle ombre del pulsante */
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.25); /* 4px 10px /16 */
 
+    /* dissolvenza morbida quando appare/scompare */
     transition: opacity 0.2s ease;
 }
 
+/* gestione del pulsante undo quando ci passi sopra */
 .back-btn:hover::after {
     opacity: 1;
 }

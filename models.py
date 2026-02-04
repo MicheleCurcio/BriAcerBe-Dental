@@ -1,10 +1,10 @@
+#import delle librerie per il DB
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
-import re
-
 
 db = SQLAlchemy()  # solo istanza, NON legata all'app qui
 
+# relazione Paziente
 class Paziente(db.Model):
     username = db.Column(db.String(64), primary_key=True)
     nome = db.Column(db.String(16), nullable=False)
@@ -14,17 +14,17 @@ class Paziente(db.Model):
     sesso = db.Column(db.String(1), nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
 
+    # controllo per il numero di telefono
     @validates("n_telefono")
     def valida_telefono(self, key, numero):
         if not (numero.isdigit() and len(numero) == 10):
             raise ValueError("Numero di telefono non valido")
         return numero
 
+# relazione Prenotazione
 class Prenotazione(db.Model):
     scopo = db.Column(db.String(80), nullable=False)
-
     data_richiesta_pren = db.Column(db.Date, nullable=False)
-
     data_visita = db.Column(db.Date, primary_key=True)
     ora_visita = db.Column(db.Integer, primary_key=True)
     matricola = db.Column(db.String(10), primary_key=True)
@@ -42,4 +42,3 @@ class Prenotazione(db.Model):
             name='uq_prenotazione_user_data_ora'
         ),
     )
-

@@ -1,28 +1,26 @@
-/* =========================
-   RESET / STRUTTURA
-========================= */
-
+/* imposta il box model su border-box per tutti gli elementi */
 * {
     box-sizing: border-box;
 }
 
+/* imposta i dati del body */
 body {
     /*background-color: brown;*/
     margin: 0;
     min-height: 100vh;
 }
 
+/* contenitore generale */
 .container-all {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 15px;
+    font-size: 0.9375rem; /* 15px /16 */
 
+    padding: 12.5rem 1rem 7.5rem; /* 200px 16px 120px /16 */
 
-    padding: 200px 16px 120px;
-
-    /* 🔹 SPAZIO TRA LE CARD */
-    gap: 28px;
+    /* spazio tra i pezzi */
+    gap: 1.75rem; /* 28px /16 */
 
     /* sfondo comune */
     background-image: url("/static/icone/sfondo_appuntamento.png");
@@ -31,46 +29,36 @@ body {
     background-size: cover;
 }
 
-/* =========================
-   FORM
-========================= */
-
+/* gestione del form */
 form {
-    /*background-color: blueviolet;*/
     width: 100%;
-    max-width: 420px;
-    margin-bottom: 12px;
+    max-width: 26.25rem; /* 420px /16 */
+    margin-bottom: 0.75rem; /* 12px /16 */
 }
 
-/* =========================
-   BOTTONE
-========================= */
-
+/* gestione del pulsante */
 .dashboard {
     width: 100%;
     border: none;
     background: none;
-    padding: 12px;
+    padding: 0.75rem; /* 12px /16 */
     cursor: pointer;
 }
 
-/* =========================
-   CARD
-========================= */
-
+/* gestione del pezzo generale */
 .piece-all {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 18px;              /* leggermente più arioso */
-    border-radius: 20px;
+    padding: 1.125rem; /* 18px /16 */
+    border-radius: 1.25rem; /* 20px /16 */
 
     background-color: #e6e6e6;
 
     box-shadow:
-            0 10px 25px rgba(0,0,0,0.18),
-            0 0 0 1px rgba(0,0,0,0.05);
+            0 0.625rem 1.5625rem rgba(0,0,0,0.18), /* 10px 25px /16 */
+            0 0 0 0.0625rem rgba(0,0,0,0.05); /* 1px /16 */
 
     transition:
             background-color 0.25s ease,
@@ -83,11 +71,11 @@ form {
     background-color: lightseagreen;
     color: white;
 
-    transform: translateY(-4px);
+    transform: translateY(-0.25rem); /* -4px /16 */
 
     box-shadow:
-            0 18px 40px rgba(0,0,0,0.22),
-            0 0 0 1px rgba(32, 178, 170, 0.6);
+            0 1.125rem 2.5rem rgba(0,0,0,0.22), /* 18px 40px /16 */
+            0 0 0 0.0625rem rgba(32, 178, 170, 0.6); /* 1px /16 */
 }
 
 /* tap mobile */
@@ -95,29 +83,29 @@ form {
     transform: scale(0.97);
 }
 
-/* =========================
-   CONTENUTO
-========================= */
-
+/* gestione dell'immagine del pezzo specifico */
 .piece-image {
-    width: 44px;
-    height: 44px;
+    width: 2.75rem; /* 44px /16 */
+    height: 2.75rem; /* 44px /16 */
     object-fit: contain;
-    margin-right: 16px;
+    margin-right: 1rem; /* 16px /16 */
     flex-shrink: 0;
 }
 
+/* gestione delle info del pezzo specifico */
 .piece-info {
     flex-grow: 1;
 }
 
+/* gestione del titolo del pezzo specifico */
 .piece-title {
-    font-size: 16px;
+    font-size: 1rem; /* 16px /16 */
     font-weight: 600;
 }
 
+/* gestione del testo del tempo del pezzo specifico */
 .piece-time {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* rimane invariato perché già in rem */
     opacity: 0.75;
     white-space: nowrap;
 }

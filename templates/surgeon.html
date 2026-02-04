@@ -1,109 +1,104 @@
+<!-- Schermata per decidere quale genere di visita del chirurgo il paziente voglia scegliere -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Chirurgo</title>
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
-</head>
+    <head>
 
-<body class="surgeon">
+        <meta charset="UTF-8">
+        <title>Chirurgo</title>
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
+    </head>
 
-<div class="back-div">
-    <form action="{{ url_for('appuntamento') }}" method="get">
-        <button type="submit" class="back-btn">
-            <img
-                    src="{{ url_for('static', filename='icone/indietro_btn.png') }}"
-                    class="back-icon"
-                    alt="Indietro"
-            >
-        </button>
-    </form>
-</div>
+    <body class="surgeon">
 
-<div class="container-all">
-    <h2>Seleziona una tipologia di visita:</h2>
-<form action="{{ url_for('sceltasurgeon') }}" method="get">
-    <input type="hidden" name="surinput" id="surinput">
-    <button type="submit" name="servizio" id="sur1"  value="estrazione" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/chirurgo.png') }}"
-                 alt="Chirurgo" class="piece-image">
-
-            <div class="piece-info">
-                <span class="piece-title">Estrazione dente del giudizio</span>
-            </div>
-
-            <span class="piece-time">30 min</span>
+        <!-- Contenitore del pulsante undo -->
+        <div class="back-div">
+            <form action="{{ url_for('appuntamento') }}" method="get">
+                <button type="submit" class="back-btn">
+                    <img src="{{ url_for('static', filename='icone/indietro_btn.png') }}" class="back-icon" alt="Indietro">
+                </button>
+            </form>
         </div>
-    </button>
-<!--</form>-->
 
-<!--<form action="{{ url_for('sceltasurgeon') }}" method="get">-->
-    <button type="submit" name="servizio" id="sur2"  value="chirurgia2" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/chirurgo.png') }}"
-                 alt="Chirurgo" class="piece-image">
+        <!-- Contenitore del chirurgo -->
+        <div class="container-all">
 
-            <div class="piece-info">
-                <span class="piece-title">Chirurgia orale</span>
-            </div>
+            <!-- Messaggio h2 -->
+            <h2>Seleziona una tipologia di visita:</h2>
 
-            <span class="piece-time">45 min</span>
+            <!-- Invia la tua scelta alla schermata di prenotazione -->
+            <form action="{{ url_for('sceltasurgeon') }}" method="get">
+                <input type="hidden" name="surinput" id="surinput">
+
+                <!-- Pulsante per il tipo di visita Estrazione dente del giudizio -->
+                <button type="submit" name="servizio" id="sur1"  value="estrazione" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/chirurgo.png') }}" alt="Chirurgo" class="piece-image">
+
+                        <div class="piece-info">
+                            <span class="piece-title">Estrazione dente del giudizio</span>
+                        </div>
+
+                        <span class="piece-time">30 min</span>
+                    </div>
+                </button>
+
+                <!-- Pulsante per il tipo di visita Chirurgia orale -->
+                <button type="submit" name="servizio" id="sur2"  value="chirurgia2" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/chirurgo.png') }}" alt="Chirurgo" class="piece-image">
+
+                        <div class="piece-info">
+                            <span class="piece-title">Chirurgia orale</span>
+                        </div>
+
+                        <span class="piece-time">45 min</span>
+                    </div>
+                </button>
+
+                <!-- Pulsante per il tipo di visita Intervento complesso -->
+                <button type="submit" name="servizio" id="sur3"  value="chirurgia3" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/chirurgo.png') }}" alt="Chirurgo" class="piece-image">
+
+                        <div class="piece-info">
+                            <span class="piece-title">Intervento complesso</span>
+                        </div>
+
+                        <span class="piece-time">60 min</span>
+                    </div>
+                </button>
+            </form>
         </div>
-    </button>
-<!--</form>-->
 
-<!--<form action="{{ url_for('sceltasurgeon') }}" method="get">-->
-    <button type="submit" name="servizio" id="sur3"  value="chirurgia3" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/chirurgo.png') }}"
-                 alt="Chirurgo" class="piece-image">
+        <script>
 
-            <div class="piece-info">
-                <span class="piece-title">Intervento complesso</span>
-            </div>
+            const sur1 = document.getElementById("sur1"); // costante referente del pulsante Estrazione dente del giudizio
+            const sur2 = document.getElementById("sur2"); // costante referente del pulsante Chirurgia orale
+            const sur3 = document.getElementById("sur3"); // costante referente del pulsante Intervento complesso
+            const surInput = document.getElementById("surinput"); //costante che cambia in base al click apposito
 
-            <span class="piece-time">60 min</span>
-        </div>
-    </button>
-</form>
-</div>
-<script>
+            // se clicchi sur1, allora il valore sarà Estrazione dente del giudizio
+            sur1.addEventListener("click", () => {
 
+                surInput.value = "Estrazione dente del giudizio";
+            });
 
-    const sur1 = document.getElementById("sur1");
-    const sur2 = document.getElementById("sur2");
-    const sur3 = document.getElementById("sur3");
-    //const surInput = document.getElementById("sur1input") || document.getElementById("sur2input") || document.getElementById("sur3input");
-    const surInput = document.getElementById("surinput")
+            // se clicchi sur2, allora il valore sarà Chirurgia orale
+            sur2.addEventListener("click", () => {
 
-    sur1.addEventListener("click", () => {
+                surInput.value = "Chirurgia orale";
+            });
 
-        surInput.value = "Pulizia dei denti";
-    });
+            // se clicchi sur3, allora il valore sarà Intervento complesso
+            sur3.addEventListener("click", () => {
 
+                surInput.value = "Intervento complesso";
+            });
 
-
-    sur2.addEventListener("click", () => {
-
-        surInput.value = "Sbiancamento";
-    });
-
-
-
-    sur3.addEventListener("click", () => {
-
-        surInput.value = "Controllo";
-    });
-
-
-
-
-</script>
-
-</body>
+        </script>
+    </body>
 </html>

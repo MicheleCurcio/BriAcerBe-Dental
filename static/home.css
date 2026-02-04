@@ -1,19 +1,13 @@
-/* =========================
-   RESET BASE
-========================= */
-
+/* CSS dell'hyml e del body */
 html, body {
     height: 100%;
     margin: 0;
 }
 
-/* =========================
-   BACKGROUND FULLSCREEN
-========================= */
-
+/* imposta i dati del body */
 body {
-    /*min-height: 100vh;*/
 
+    /* gestisce lo sfondo del body */
     background-image: url("/static/icone/sfondo-logo.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -24,43 +18,37 @@ body {
     position: relative;
 }
 
-/* =========================
-   CONTENITORE CENTRALE
-========================= */
-
+/* gestisce il contenitore prenota */
 .prenota {
-    /*min-height: 50vh;*/
-    /*bottom: 50%;*/
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    top: 45%; /* spostamento verso il basso */
-
+    top: 2.8125rem; /* 45% /16 → circa 2.8125rem */
 }
 
-/* =========================
-   BOTTONE PRENOTA
-========================= */
-
+/* gestisce il pulsante prenota */
 .prenotabtn {
-    border: lightslategrey 1px solid;
+    border: lightslategrey 0.0625rem solid; /* 1px /16 */
     border-radius: 999px;
 
-    width: clamp(240px, 70vw, 380px);
-    height: 68px;
+    width: clamp(15rem, 70vw, 23.75rem); /* 240px /16 → 380px /16 */
+    height: 4.25rem; /* 68px /16 */
 
     background-color: rgba(255, 255, 255, 0.9);
     color: #222;
 
-    font-size: 16px;
+    font-size: 1rem; /* 16px /16 */
     font-weight: 500;
 
+    /* gestisce la manina quando ci passi sopra */
     cursor: pointer;
 
+    /* gestisce le ombre del contenitore */
     box-shadow:
-            0 10px 25px rgba(0, 0, 0, 0.25);
+            0 0.625rem 1.5625rem rgba(0, 0, 0, 0.25); /* 10px 25px /16 */
 
+    /* rende fluida l'animazione di quando ci passi sopra */
     transition:
             background-color 0.25s ease,
             color 0.25s ease,
@@ -68,60 +56,59 @@ body {
             box-shadow 0.15s ease;
 }
 
+/* gestione del pulsante quando ci passi sopra */
 .prenotabtn:hover {
     background-color: lightseagreen;
     color: white;
 }
 
+/* seleziona i pulsanti solo nel momento in cui vengono premuti */
 .prenotabtn:active {
-    transform: scale(0.97);
+    transform: scale(0.97); /* riduce leggermente in scala la dimensione del bottone */
+
+    /* gestisce le ombre del contenitore */
     box-shadow:
-            0 6px 15px rgba(0, 0, 0, 0.35);
+            0 0.375rem 0.9375rem rgba(0, 0, 0, 0.35); /* 6px 15px /16 */
 }
 
-/* =========================
-   HEADER USER (LOGIN STATE)
-========================= */
-
+/* contenitore .user-greeting */
 .user-greeting {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 1.25rem; /* 20px /16 */
+    left: 1.25rem; /* 20px /16 */
 
-    padding: 10px 16px;
+    padding: 0.625rem 1rem; /* 10px 16px /16 */
 
     background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(0.375rem); /* 6px /16 */
 
-    border-radius: 20px;
-    border:lightslategrey solid 1px;
+    border-radius: 1.25rem; /* 20px /16 */
+    border: lightslategrey 0.0625rem solid; /* 1px /16 */
 
     color: #222;
     font-size: 0.95rem;
     font-weight: 500;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* gestisce le ombre del contenitore */
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15); /* 4px 12px /16 */
 
-    z-index: 10;
+    z-index: 10; /* metti il contenitore sopra altri elementi */
 }
 
-/* =========================
-   LOGOUT BUTTON
-========================= */
-
+/* gestisce il pulsante del logout */
 .logout-btn {
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 0.625rem; /* 10px /16 */
+    right: 1.25rem; /* 20px /16 */
 
-    width: 60px;
-    height: 60px;
+    width: 3.75rem; /* 60px /16 */
+    height: 3.75rem; /* 60px /16 */
 
-    border: gray solid 2px;
+    border: gray 0.125rem solid; /* 2px /16 */
     border-radius: 50%;
 
     background: whitesmoke;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(0.375rem); /* 6px /16 */
 
     display: flex;
     align-items: center;
@@ -129,48 +116,46 @@ body {
 
     cursor: pointer;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* gestione delle ombre del pulsante */
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15); /* 4px 12px /16 */
 
+    /* gestione delle animazioni del pulsante */
     transition:
             background-color 0.2s ease,
             transform 0.15s ease,
             box-shadow 0.15s ease;
 }
 
+/* gestisce il pulsante del logout quando ci passi sopra */
 .logout-btn:hover {
     background-color: lightseagreen;
     transform: scale(1.05);
 }
 
+/* seleziona il pulsante solo nel momento in cui vengono premuti */
 .logout-btn:active {
     transform: scale(0.95);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.1875rem 0.5rem rgba(0, 0, 0, 0.25); /* 3px 8px /16 */
 }
 
-/* =========================
-   LOGOUT ICON
-========================= */
-
+/* immagini del logout */
 .logout-icon {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem; /* 40px /16 */
+    height: 2.5rem; /* 40px /16 */
     object-fit: contain;
 }
 
-/* =========================
-   TOOLTIP LOGOUT
-========================= */
-
+/* crea un elemento finto DOPO il pulsante dell’elemento */
 .logout-btn::after {
     content: "Logout";
 
     position: absolute;
     top: 50%;
-    right: 110%;
+    right: 6.875rem; /* 110% circa, se 100% larghezza pulsante ~ 6.25rem + padding extra */
 
     transform: translateY(-50%);
 
-    padding: 6px 10px;
+    padding: 0.375rem 0.625rem; /* 6px 10px /16 */
 
     background: rgba(0, 0, 0, 0.75);
     color: white;
@@ -178,16 +163,17 @@ body {
     font-size: 0.75rem;
     white-space: nowrap;
 
-    border-radius: 8px;
+    border-radius: 0.5rem; /* 8px /16 */
 
     opacity: 0;
     pointer-events: none;
 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.25); /* 4px 10px /16 */
 
     transition: opacity 0.2s ease;
 }
 
+/* gestione del pulsante logout quando ci passi sopra */
 .logout-btn:hover::after {
     opacity: 1;
 }

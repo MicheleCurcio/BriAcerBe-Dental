@@ -1,59 +1,74 @@
+<!-- Schermata per la registrazione -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrazione</title>
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
-</head>
-<body>
-<div class="container">
-    <h1>Registrati</h1>
-    <form action="{{ url_for('register') }}" method="post" class="register-form" >
 
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" required>
+    <head>
 
-        <label for="cognome">Cognome</label>
-        <input type="text" id="cognome" name="cognome" required>
+        <meta charset="UTF-8">
+        <title>Registrazione</title>
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
 
-        <label for="datanascita">Data di nascita</label>
-        <input type="date" id="datanascita" name="datanascita" required>
+    </head>
 
-        <label>Sesso</label>
-        <div class="radio-group">
-            <label class="radio-option">
-                <input type="radio" name="sesso" value="M" required>
-                <span>M</span>
-            </label>
+    <body>
 
-            <label class="radio-option">
-                <input type="radio" name="sesso" value="F">
-                <span>F</span>
-            </label>
+        <!-- Contenitore della registrazione -->
+        <div class="container">
+
+            <!-- Messaggio h1 -->
+            <h1>Registrati</h1>
+
+            <!-- Invia i tuoi dati e verifica se la registrazione è andata a buon fine -->
+            <form action="{{ url_for('register') }}" method="post" class="register-form" >
+
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognome" name="cognome" required>
+
+                <label for="datanascita">Data di nascita</label>
+                <input type="date" id="datanascita" name="datanascita" required>
+
+                <label>Sesso</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="sesso" value="M" required>
+                        <span>M</span>
+                    </label>
+
+                    <label class="radio-option">
+                        <input type="radio" name="sesso" value="F">
+                        <span>F</span>
+                    </label>
+                </div>
+
+                <label for="numerotelefono">Numero di telefono</label>
+                <input type="tel" id="numerotelefono" name="numerotelefono" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" required>
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="confermapassword">Conferma password</label>
+                <input type="password" id="confermapassword" name="confermapassword" required>
+
+                <button type="submit">
+                    Registrati
+                </button>
+            </form>
+
+            <br>
+
+            <!-- Vai alla schermata di login -->
+            <form action="{{ url_for('login') }}" method="get" class="login-form" >
+                <button type="submit">
+                    Torna al login
+                </button>
+            </form>
         </div>
-
-
-
-        <label for="numerotelefono">Numero di telefono</label>
-        <input type="tel" id="numerotelefono" name="numerotelefono" pattern="[0-9]{10}" maxlength="10" inputmode="numeric" required>
-
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
-
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-
-        <label for="confermapassword">Conferma password</label>
-        <input type="password" id="confermapassword" name="confermapassword" required>
-
-        <button type="submit">Registrati</button>
-    </form>
-    <br>
-<form action="{{ url_for('login') }}" method="get" class="login-form" >
-    <button type="submit">Torna al login</button>
-</form>
-</div>
-
-</body>
+    </body>
 </html>

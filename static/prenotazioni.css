@@ -1,17 +1,14 @@
-/* =========================
-   BASE / FIX SCROLL
-========================= */
-
+/* CSS dell'hyml e del body */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-/* NON tocchiamo bottom.css */
-/* Il body NON deve essere flex qui */
-
+/* imposta i dati del body */
 body {
+
+    /* imposta lo sfondo dello schermo */
     background-image: url("/static/icone/sfondo_appuntamento.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -25,40 +22,34 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-/* =========================
-   LISTA PRENOTAZIONI
-========================= */
-
+/* gestione della lista delle prenotazioni */
 .prenotazioni-list {
     list-style: none;
     margin: 0 auto;
-    padding: 160px 16px 140px; /* spazio top + spazio bottom bar */
+    padding: 10rem 1rem 8.75rem; /* 160px 16px 140px /16 */
 
-    max-width: 420px;
+    max-width: 26.25rem; /* 420px /16 */
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.25rem; /* 20px /16 */
 }
 
-/* =========================
-   CARD PRENOTAZIONE
-========================= */
-
+/* gestione del contenitore della prenotazione x */
 .prenotazione-card {
     position: relative;
 
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 22px;
-    padding: 20px 20px 20px 26px;
+    border-radius: 1.375rem; /* 22px /16 */
+    padding: 1.25rem 1.25rem 1.25rem 1.625rem; /* 20px 20px 20px 26px /16 */
 
     box-shadow:
-            0 12px 28px rgba(0,0,0,0.18),
-            0 0 0 1px rgba(0,0,0,0.05);
+            0 0.75rem 1.75rem rgba(0,0,0,0.18), /* 12px 28px /16 */
+            0 0 0 0.0625rem rgba(0,0,0,0.05); /* 1px /16 */
 
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 0.875rem; /* 14px /16 */
 }
 
 /* linea laterale stile appuntamento */
@@ -66,56 +57,43 @@ body {
     content: "";
     position: absolute;
     left: 0;
-    top: 16px;
-    bottom: 16px;
-    width: 6px;
+    top: 1rem; /* 16px /16 */
+    bottom: 1rem; /* 16px /16 */
+    width: 0.375rem; /* 6px /16 */
     border-radius: 999px;
     background-color: lightseagreen;
 }
 
-/* =========================
-   RIGHE
-========================= */
-
+/* riga della prenotazione */
 .prenotazione-row {
     display: flex;
     align-items: center;
-    gap: 8px; /* distanza tra label, value e pulsante */
+    gap: 0.5rem; /* 8px /16 */
 }
-
-/*.prenotazione-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}*/
 
 /* titolo / scopo */
 .prenotazione-row.titolo {
-    font-size: 18px;
+    font-size: 1.125rem; /* 18px /16 */
     font-weight: 650;
-    margin-bottom: 6px;
+    margin-bottom: 0.375rem; /* 6px /16 */
 }
 
 /* label */
 .label {
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px /16 */
     opacity: 0.6;
 }
 
 /* valore */
 .value {
-    font-size: 15px;
+    font-size: 0.9375rem; /* 15px /16 */
     font-weight: 600;
 }
 
-
-/* =========================
-   DELETE BUTTON
-========================= */
-
+/* pulsante cestino */
 .delete-btn {
-    height: 40px;
-    padding: 0 16px;
+    height: 2.5rem; /* 40px /16 */
+    padding: 0 1rem; /* 16px /16 */
 
     border-radius: 999px;
     border: 1px solid rgba(220, 53, 69, 0.4);
@@ -123,14 +101,14 @@ body {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(4px);
 
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px /16 */
     font-weight: 600;
     color: #b02a37;
 
     cursor: pointer;
 
     box-shadow:
-            0 8px 20px rgba(0,0,0,0.18);
+            0 0.5rem 1.25rem rgba(0,0,0,0.18); /* 8px 20px /16 */
 
     transition:
             background-color 0.25s ease,
@@ -141,18 +119,41 @@ body {
 
 /* hover/passo cursore → ROSSO */
 .delete-btn:hover {
-    background-color: #dc3545; /* rosso bootstrap-style */
+    background-color: #dc3545;
     color: white;
 
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem); /* -2px /16 */
 
     box-shadow:
-            0 14px 32px rgba(220, 53, 69, 0.45);
+            0 0.875rem 2rem rgba(220, 53, 69, 0.45); /* 14px 32px /16 */
 }
 
 /* tap mobile */
 .delete-btn:active {
     transform: scale(0.96);
+
     box-shadow:
-            0 6px 16px rgba(220, 53, 69, 0.5);
+            0 0.375rem 1rem rgba(220, 53, 69, 0.5); /* 6px 16px /16 */
 }
+
+/* contenitore se non si hanno prenotazioni */
+.empty-state {
+    height: calc(100vh - 5rem); /* 80px /16 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #888;
+    text-align: center;
+}
+
+/* paragrafo del contenitore se non si hanno prenotazioni */
+.empty-state p {
+    opacity: 0.8;
+}
+
+/*.prenotazione-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}*/

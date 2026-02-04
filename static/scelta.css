@@ -1,81 +1,67 @@
-/* =========================
-   RESET / BASE
-========================= */
-
+/* imposta il box model su border-box per tutti gli elementi */
 * {
     box-sizing: border-box;
 }
 
+/* CSS dell'hyml e del body */
 html, body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
 }
 
+/* imposta i dati del body */
 body {
     display: flex;
     justify-content: center;
 
-    padding: 160px 16px 140px;
+    padding: 10rem 1rem 8.75rem; /* 160px 16px 140px /16 */
 
+    /* imposta lo sfondo dello schermo */
     background-image: url("/static/icone/sfondo_appuntamento.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 
+    /* imposta i dati del testo */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     color: #222;
 }
 
-/* =========================
-   LAYOUT PRINCIPALE
-========================= */
-
+/* container principale */
 .scelta-container {
     width: 100%;
-    max-width: 900px;
+    max-width: 56.25rem; /* 900px /16 */
 
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 40px;
+    grid-template-columns: 1fr 17.5rem; /* 280px /16 */
+    gap: 2.5rem; /* 40px /16 */
 }
 
-/* =========================
-   COLONNA SINISTRA (SCELTE)
-========================= */
-
+/* container di sinistra */
 .scelte-left {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 1.75rem; /* 28px /16 */
 }
 
-/* =========================
-   SEZIONE SCELTA
-========================= */
-
+/* imposta i valori del container di sinistra */
 .scelta-section {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 0.875rem; /* 14px /16 */
     font-family: \Galvij;
 }
 
-/* =========================
-   TITOLI SEZIONE
-========================= */
-
+/* imposta il titolo del contenitore */
 .scelta-title {
-    font-size: 15px;
+    font-size: 0.9375rem; /* 15px /16 */
     font-weight: 600;
     opacity: 0.8;
-    margin-left: 6px;
+    margin-left: 0.375rem; /* 6px /16 */
 }
 
-/* =========================
-   BOTTONI BASE (SCELTA)
-========================= */
-
+/* imposta il pulsante del contenitore */
 button {
     border: none;
     background: none;
@@ -83,107 +69,94 @@ button {
     cursor: pointer;
 }
 
-/* =========================
-   CARD SELEZIONE
-========================= */
-
+/* quando clicchi sul pulsante */
 button[type="button"] {
     width: 100%;
-    max-width: 420px;
+    max-width: 26.25rem; /* 420px /16 */
 
-    padding: 16px 20px;
-    border-radius: 20px;
+    padding: 1rem 1.25rem; /* 16px 20px /16 */
+    border-radius: 1.25rem; /* 20px /16 */
 
     background-color: #e6e6e6;
 
-    font-size: 16px;
+    font-size: 1rem; /* 16px /16 */
     font-weight: 600;
     text-align: center;
 
+    /* gestione delle ombre del pulsante */
     box-shadow:
-            0 10px 25px rgba(0,0,0,0.18),
-            0 0 0 1px rgba(0,0,0,0.05);
+            0 0.625rem 1.5625rem rgba(0,0,0,0.18), /* 10px 25px /16 */
+            0 0 0 0.0625rem rgba(0,0,0,0.05); /* 1px /16 */
 
+    /* rende fluida l'animazione di quando ci passi sopra */
     transition:
             background-color 0.25s ease,
             transform 0.15s ease,
             box-shadow 0.15s ease;
 }
 
-/* hover */
+/* quando passi sopra al pulsante */
 button[type="button"]:hover {
     background-color: rgba(32, 178, 170, 0.9);
     color: white;
 
-    transform: translateY(-4px);
+    transform: translateY(-0.25rem); /* -4px /16 */
 
+    /* gestione delle ombre del pulsante */
     box-shadow:
-            0 18px 40px rgba(0,0,0,0.22),
-            0 0 0 1px rgba(32, 178, 170, 0.6);
+            0 1.125rem 2.5rem rgba(0,0,0,0.22), /* 18px 40px /16 */
+            0 0 0 0.0375rem rgba(32, 178, 170, 0.6); /* 0.6 * 1px = 0.0375rem */
 }
 
-/* =========================
-   STATO SELEZIONATO
-========================= */
-
+/* stato selezionato */
 .selected {
     background-color: lightseagreen !important;
     color: white !important;
 
     box-shadow:
-            0 18px 40px rgba(0,0,0,0.28),
-            0 0 0 2px rgba(32, 178, 170, 0.8);
+            0 1.125rem 2.5rem rgba(0,0,0,0.28),
+            0 0 0 0.125rem rgba(32, 178, 170, 0.8);
 }
 
-/* =========================
-   NASCOSTO (ORARI NON DISP.)
-========================= */
-
+/* nascondo gli orari non disponibili */
 .hidden {
     display: none !important;
 }
 
-/* =========================
-   COLONNA DESTRA (CONFERMA)
-========================= */
-
+/* container di destra */
 .conferma-wrapper {
     position: sticky;
-    top: 160px;
+    top: 10rem; /* 160px /16 */
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* =========================
-   FORM CONFERMA
-========================= */
-
+/* imposta il form */
 form {
     width: 100%;
 }
 
-/* =========================
-   BOTTONE CONFERMA
-========================= */
-
+/* pulsante conferma */
 .conferma {
     width: 100%;
-    height: 64px;
+    height: 4rem; /* 64px /16 */
 
     border-radius: 999px;
 
     background-color: rgba(255, 255, 255, 0.9);
-    border: lightslategrey 1px solid;
+    border: 0.0625rem solid lightslategrey; /* 1px /16 */
 
-    font-size: 16px;
+    font-size: 1rem; /* 16px /16 */
     font-weight: 600;
     color: #222;
 
+    /* gestione delle ombre del pulsante */
     box-shadow:
-            0 10px 25px rgba(0,0,0,0.25);
+            0 0.625rem 1.5625rem rgba(0,0,0,0.25); /* 10px 25px /16 */
 
+    /* rende fluida l'animazione di quando ci passi sopra */
     transition:
             background-color 0.25s ease,
             color 0.25s ease,
@@ -191,35 +164,39 @@ form {
             box-shadow 0.15s ease;
 }
 
+/* quando passi sopra il pulsante conferma */
 .conferma:hover {
     background-color: lightseagreen;
     color: white;
 }
 
+/* seleziona i pulsanti solo nel momento in cui vengono premuti */
 .conferma:active {
     transform: scale(0.97);
     box-shadow:
-            0 6px 15px rgba(0,0,0,0.35);
+            0 0.375rem 0.9375rem rgba(0,0,0,0.35); /* 6px 15px /16 */
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 768px) {
+/* imposta i dati da mobile */
+@media (max-width: 48rem) { /* 768px /16 */
     .scelta-container {
         grid-template-columns: 1fr;
     }
 
     .conferma-wrapper {
         position: fixed;
-        bottom: 16px;
-        left: 16px;
-        right: 16px;
+        bottom: 1rem; /* 16px /16 */
+        left: 1rem;   /* 16px /16 */
+        right: 1rem;  /* 16px /16 */
         top: auto;
     }
 
     .conferma {
         width: 100%;
     }
+}
+
+/* imposta lo stato nascosto */
+.nascosto{
+    display: none;
 }

@@ -1,37 +1,40 @@
+<!-- Schermata delle Info -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Info</title>
-    <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='bottom.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='info.css') }}">
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+        <title>Info</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='bottom.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='info.css') }}">
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
+    </head>
 
-<div class="info-card">
+    <body>
 
-    <div class="info-text">
-        <h1>BriAcerBe Dental</h1>
-        <p>
-            Via M.Granato,69<br>
-            Somma Vesuviana (NA)
-        </p>
-    </div>
+        <!-- Contenitore della schermata Info -->
+        <div class="info-card">
 
-    <img
-            src="{{ url_for('static', filename='icone/logo.png') }}"
-            alt="Logo BriAcerBe Dental"
-            class="logo-container"
-    />
+            <!-- Contenitore del testo della schermata Info -->
+            <div class="info-text">
+                <h1>BriAcerBe Dental</h1>
+                <p>
+                    Via M.Granato,69
+                    <br>
+                    Somma Vesuviana (NA)
+                </p>
+            </div>
 
-</div>
+            <!-- Immagine del logo -->
+            <img src="{{ url_for('static', filename='icone/logo.png') }}" alt="Logo BriAcerBe Dental" class="logo-container"/>
 
-{% include 'components/bottom.html' %}
+        </div>
 
-</body>
+        <!-- Includi la componente bottom in basso allo schermo -->
+        {% include 'components/bottom.html' %}
+
+    </body>
 </html>

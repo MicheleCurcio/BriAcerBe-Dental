@@ -1,112 +1,104 @@
+<!-- Schermata per decidere quale genere di visita dell'igienista il paziente voglia scegliere -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Igienista</title>
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Igienista</title>
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
-<body class="igienista">
+    </head>
 
+    <body class="igienista">
 
-<div class="back-div">
-    <form action="{{ url_for('appuntamento') }}" method="get">
-        <button type="submit" class="back-btn">
-            <img
-                    src="{{ url_for('static', filename='icone/indietro_btn.png') }}"
-                    class="back-icon"
-                    alt="Indietro"
-            >
-        </button>
-    </form>
-</div>
-
-<div class="container-all">
-    <h2>Seleziona una tipologia di visita:</h2>
-<form action="{{ url_for('sceltahygienist') }}" method="get">
-    <input type="hidden" name="hyginput" id="hyginput">
-<!--    <input type="hidden" name="hyg1input" id="hyg1input">-->
-    <button type="submit" name="servizio" id="hyg1" value="pulizia" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/igienista.png') }}"
-                 alt="Igienista" class="piece-image">
-
-            <div class="piece-info">
-                <span class="piece-title">Pulizia dei denti</span>
-            </div>
-
-            <span class="piece-time">15 min</span>
+        <!-- Contenitore del pulsante undo -->
+        <div class="back-div">
+            <form action="{{ url_for('appuntamento') }}" method="get">
+                <button type="submit" class="back-btn">
+                    <img src="{{ url_for('static', filename='icone/indietro_btn.png') }}" class="back-icon" alt="Indietro">
+                </button>
+            </form>
         </div>
-    </button>
-<!--</form>-->
 
-<!--<form action="{{ url_for('sceltahygienist') }}" method="get">-->
-<!--    <input type="hidden" name="hyg2input" id="hyg2input">-->
-    <button type="submit" name="servizio" id="hyg2" value="sbiancamento" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/igienista.png') }}"
-                 alt="Igienista" class="piece-image">
+        <!-- Contenitore dell'igienista -->
+        <div class="container-all">
 
-            <div class="piece-info">
-                <span class="piece-title">Sbiancamento</span>
-            </div>
+            <!-- Messaggio h2 -->
+            <h2>Seleziona una tipologia di visita:</h2>
 
-            <span class="piece-time">30 min</span>
+            <!-- Invia la tua scelta alla schermata di prenotazione -->
+            <form action="{{ url_for('sceltahygienist') }}" method="get">
+                <input type="hidden" name="hyginput" id="hyginput">
+
+                <!-- Pulsante per il tipo di visita Pulizia dei denti -->
+                <button type="submit" name="servizio" id="hyg1" value="pulizia" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/igienista.png') }}" alt="Igienista" class="piece-image">
+
+                        <div class="piece-info">
+                            <span class="piece-title">Pulizia dei denti</span>
+                        </div>
+
+                        <span class="piece-time">15 min</span>
+                    </div>
+                </button>
+
+                <!-- Pulsante per il tipo di visita Sbiancamento -->
+                <button type="submit" name="servizio" id="hyg2" value="sbiancamento" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/igienista.png') }}" alt="Igienista" class="piece-image">
+
+                        <div class="piece-info">
+                            <span class="piece-title">Sbiancamento</span>
+                        </div>
+
+                        <span class="piece-time">30 min</span>
+                    </div>
+                </button>
+
+                <!-- Pulsante per il tipo di visita Controllo -->
+                <button type="submit" name="servizio" id="hyg3" value="controllo" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/igienista.png') }}" alt="Igienista" class="piece-image">
+
+                        <div class="piece-info">
+                            <span class="piece-title">Controllo</span>
+                        </div>
+
+                        <span class="piece-time">10 min</span>
+                    </div>
+                </button>
+            </form>
         </div>
-    </button>
-<!--</form>-->
 
-<!--<form action="{{ url_for('sceltahygienist') }}" method="get">-->
-<!--    <input type="hidden" name="hyg3input" id="hyg3input">-->
-    <button type="submit" name="servizio" id="hyg3" value="controllo" class="dashboard">
-        <div class="piece-all">
-            <img src="{{ url_for('static', filename='icone/igienista.png') }}"
-                 alt="Igienista" class="piece-image">
+        <script>
+            
+            const hyg1 = document.getElementById("hyg1"); // costante referente del pulsante Pulizia dei denti
+            const hyg2 = document.getElementById("hyg2"); // costante referente del pulsante Sbiancamento
+            const hyg3 = document.getElementById("hyg3"); // costante referente del pulsante Controllo
+            const hygInput = document.getElementById("hyginput"); //costante che cambia in base al click apposito
 
-            <div class="piece-info">
-                <span class="piece-title">Controllo</span>
-            </div>
+            // se clicchi hyg1, allora il valore sarà Pulizia dei denti
+            hyg1.addEventListener("click", () => {
 
-            <span class="piece-time">10 min</span>
-        </div>
-    </button>
-</form>
-</div>
-<script>
+                hygInput.value = "Pulizia dei denti";
+            });
 
+            // se clicchi hyg2, allora il valore sarà Sbiancamento
+            hyg2.addEventListener("click", () => {
 
-    const hyg1 = document.getElementById("hyg1");
-    const hyg2 = document.getElementById("hyg2");
-    const hyg3 = document.getElementById("hyg3");
-    //const hygInput = document.getElementById("hyg1input") || document.getElementById("hyg2input") || document.getElementById("hyg3input");
-    const hygInput = document.getElementById("hyginput")
+                hygInput.value = "Sbiancamento";
+            });
 
-    hyg1.addEventListener("click", () => {
+            // se clicchi hyg3, allora il valore sarà Controllo
+            hyg3.addEventListener("click", () => {
 
-        hygInput.value = "Pulizia dei denti";
-    });
+                hygInput.value = "Controllo";
+            });
 
+        </script>
 
-
-    hyg2.addEventListener("click", () => {
-
-        hygInput.value = "Sbiancamento";
-    });
-
-
-
-    hyg3.addEventListener("click", () => {
-
-        hygInput.value = "Controllo";
-    });
-
-
-
-
-</script>
-
-</body>
+    </body>
 </html>

@@ -1,21 +1,21 @@
-/* =========================
-   RESET & BASE
-========================= */
-
+/* imposta il box model su border-box per tutti gli elementi */
 * {
     box-sizing: border-box;
 }
 
+/* CSS dell'hyml e del body */
 html, body {
     height: 100%;
     margin: 0;
 }
 
+/* imposta i dati del body */
 body {
     display: flex;
     align-items: center;
     justify-content: center;
 
+    /* gestisce lo sfondo del body */
     background-image: url("/static/icone/sfondo_appuntamento.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -25,120 +25,112 @@ body {
     color: #222;
 }
 
-/* =========================
-   LOGIN CARD
-========================= */
-
+/* contenitore del login */
 .container {
     width: 100%;
-    max-width: 360px;
+    max-width: 22.5rem; /* 360px /16 */
 
     background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(0.5rem); /* 8px /16 */
 
-    border-radius: 24px;
-    padding: 32px 28px;
+    border-radius: 1.5rem; /* 24px /16 */
+    padding: 2rem 1.75rem; /* 32px 28px /16 */
 
+    /* gestisce le ombre del contenitore */
     box-shadow:
-            0 15px 40px rgba(0, 0, 0, 0.25);
+            0 0.9375rem 2.5rem rgba(0, 0, 0, 0.25); /* 15px 40px /16 */
 
     text-align: center;
 }
 
-/* =========================
-   TITOLI
-========================= */
-
+/* contenitore h1 */
 .container h1 {
-    margin-bottom: 24px;
-    font-size: 26px;
+    margin-bottom: 1.5rem; /* 24px /16 */
+    font-size: 1.625rem; /* 26px /16 */
     font-weight: 700;
 }
 
-/* =========================
-   FORM
-========================= */
-
+/* lancio del form del login */
 .login-form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0.75rem; /* 12px /16 */
 }
 
+/* gestisce la label del lancio del form del login */
 .login-form label {
     text-align: left;
     font-size: 0.85rem;
     opacity: 0.8;
 }
 
+/* gestisce l'input del lancio del form del login */
 .login-form input {
-    padding: 12px 14px;
+    padding: 0.75rem 0.875rem; /* 12px 14px /16 */
 
-    border-radius: 14px;
-    border: 1px solid #ccc;
+    border-radius: 0.875rem; /* 14px /16 */
+    border: 0.0625rem solid #ccc; /* 1px /16 */
 
     font-size: 0.95rem;
 
-    outline: none;
+    outline: none; /* rimuove il bordo blu predefinito del browser quando l’input è selezionato */
+
+    /* rende fluida l'animazione di quando ci passi sopra */
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* se l'utente ci ha cliccato dentro o vi ha navigato tramite tastiera */
 .login-form input:focus {
     border-color: lightseagreen;
-    box-shadow: 0 0 0 2px rgba(32, 178, 170, 0.25);
+    box-shadow: 0 0 0 0.125rem rgba(32, 178, 170, 0.25); /* 2px /16 */
 }
 
-/* =========================
-   BUTTONS
-========================= */
-
+/* pulsante del login */
 .primary-btn {
-    margin-top: 16px;
+    margin-top: 1rem; /* 16px /16 */
 
-    padding: 14px;
+    padding: 0.875rem; /* 14px /16 */
     border: none;
     border-radius: 999px;
 
     background-color: lightseagreen;
     color: white;
 
-    font-size: 1rem;
+    font-size: 1rem; /* 16px /16 */
     font-weight: 600;
 
+    /* imposta la manina */
     cursor: pointer;
 
+    /* rende fluida l'animazione di quando ci passi sopra */
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+/* pulsante del login quando ci passi sopra */
 .primary-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(32, 178, 170, 0.45);
+    transform: translateY(-0.0625rem); /* -1px /16 */
+    box-shadow: 0 0.5rem 1.25rem rgba(32, 178, 170, 0.45); /* 8px 20px /16 */
 }
 
+/* seleziona i pulsanti solo nel momento in cui vengono premuti */
 .primary-btn:active {
-    transform: scale(0.97);
+    transform: scale(0.97); /* riduce leggermente in scala la dimensione del bottone */
 }
 
-/* =========================
-   DIVIDER
-========================= */
-
+/* gestisce il contenitore del divisore */
 .divider {
-    margin: 20px 0;
+    margin: 1.25rem 0; /* 20px /16 */
     font-size: 0.85rem;
     opacity: 0.6;
 }
 
-/* =========================
-   SECONDARY BUTTON
-========================= */
-
+/* pulsante della registrazione */
 .secondary-btn {
     width: 100%;
 
-    padding: 12px;
+    padding: 0.75rem; /* 12px /16 */
     border-radius: 999px;
-    border: 2px solid lightseagreen;
+    border: 0.125rem solid lightseagreen; /* 2px /16 */
 
     background: transparent;
     color: lightseagreen;
@@ -146,13 +138,16 @@ body {
     font-size: 0.95rem;
     font-weight: 600;
 
+    /* imposta la manina */
     cursor: pointer;
 
+    /* gestione delle animazioni del pulsante */
     transition:
             background-color 0.2s ease,
             color 0.2s ease;
 }
 
+/* pulsante della registrazione quando ci passi sopra */
 .secondary-btn:hover {
     background-color: lightseagreen;
     color: white;

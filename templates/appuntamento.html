@@ -1,56 +1,60 @@
+<!-- Schermata dell'appuntamento per decidere se prenotare un dentista, igienista o paziente -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Appuntamento</title>
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='appuntamento.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
-</head>
-<body>
-<h1 class="scelta">Seleziona lo specialista:</h1>
+    <head>
 
+        <meta charset="UTF-8">
+        <title>Appuntamento</title>
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='appuntamento.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
+    </head>
 
-<div class="dentist-div">
-    <form action="{{ url_for('dentist') }}" method="get">
-        <button type="submit" class="dentist-btn">
-            <img src="{{ url_for('static', filename='icone/dentista.png') }}" alt="Dentista">
-            Dentista
-        </button>
-    </form>
-</div>
+    <body>
 
-<div class="surgeon-div">
-    <form action="{{ url_for('surgeon') }}" method="get">
-        <button type="submit" class="surgeon-btn">
-            <img src="{{ url_for('static', filename='icone/chirurgo.png') }}" alt="Chirurgo">
-            Chirurgo
-        </button>
-    </form>
-</div>
+        <!-- Messaggio h1 -->
+        <h1 class="scelta">Seleziona lo specialista:</h1>
 
-<div class="hygienist-div">
-    <form action="{{ url_for('hygienist') }}" method="get">
-        <button type="submit" class="hygienist-btn">
-            <img src="{{ url_for('static', filename='icone/igienista.png') }}" alt="Igienista">
-            Igienista
-        </button>
-    </form>
-</div>
+        <!-- Contenitore del dentista -->
+        <div class="dentist-div">
+            <form action="{{ url_for('dentist') }}" method="get">
+                <button type="submit" class="dentist-btn">
+                    <img src="{{ url_for('static', filename='icone/dentista.png') }}" alt="Dentista">
+                    Dentista
+                </button>
+            </form>
+        </div>
 
-<div class="back-div">
-    <form action="{{ url_for('home') }}" method="get">
-        <button type="submit" class="back-btn">
-            <img
-                    src="{{ url_for('static', filename='icone/indietro_btn.png') }}"
-                    class="back-icon"
-                    alt="Indietro"
-            >
-        </button>
-    </form>
-</div>
+        <!-- Contenitore del chirurgo -->
+        <div class="surgeon-div">
+            <form action="{{ url_for('surgeon') }}" method="get">
+                <button type="submit" class="surgeon-btn">
+                    <img src="{{ url_for('static', filename='icone/chirurgo.png') }}" alt="Chirurgo">
+                    Chirurgo
+                </button>
+            </form>
+        </div>
 
-</body>
+        <!-- Contenitore dell'igienista -->
+        <div class="hygienist-div">
+            <form action="{{ url_for('hygienist') }}" method="get">
+                <button type="submit" class="hygienist-btn">
+                    <img src="{{ url_for('static', filename='icone/igienista.png') }}" alt="Igienista">
+                    Igienista
+                </button>
+            </form>
+        </div>
+
+        <!-- Contenitore del pulsante undo -->
+        <div class="back-div">
+            <form action="{{ url_for('home') }}" method="get">
+                <button type="submit" class="back-btn">
+                    <img src="{{ url_for('static', filename='icone/indietro_btn.png') }}" class="back-icon" alt="Indietro">
+                </button>
+            </form>
+        </div>
+
+    </body>
 </html>

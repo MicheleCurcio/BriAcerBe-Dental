@@ -1,109 +1,104 @@
+<!-- Schermata per decidere quale genere di visita del dentista il paziente voglia scegliere -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dentista</title>
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
-</head>
+    <head>
 
-<body class="dentista">
+        <meta charset="UTF-8">
+        <title>Dentista</title>
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='piece.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
+    </head>
 
-<div class="back-div">
-    <form action="{{ url_for('appuntamento') }}" method="get">
-        <button type="submit" class="back-btn">
-            <img
-                    src="{{ url_for('static', filename='icone/indietro_btn.png') }}"
-                    class="back-icon"
-                    alt="Indietro"
-            >
-        </button>
-    </form>
-</div>
+    <body class="dentista">
 
-<div class="container-all">
-    <h2>Seleziona una tipologia di visita:</h2>
-    <form action="{{ url_for('sceltadentist') }}" method="get">
-        <input type="hidden" name="deninput" id="deninput">
-        <button type="submit" name="servizio" id="den1" value="otturazione" class="dashboard">
-            <div class="piece-all">
-                <img src="{{ url_for('static', filename='icone/dentista.png') }}"
-                     alt="Dentista" class="piece-image">
+        <!-- Contenitore del pulsante undo -->
+        <div class="back-div">
+            <form action="{{ url_for('appuntamento') }}" method="get">
+                <button type="submit" class="back-btn">
+                    <img src="{{ url_for('static', filename='icone/indietro_btn.png') }}" class="back-icon" alt="Indietro">
+                </button>
+            </form>
+        </div>
 
-                <div class="piece-info">
-                    <span class="piece-title">Otturazione</span>
-                </div>
+        <!-- Contenitore del dentista -->
+        <div class="container-all">
 
-                <span class="piece-time">30 min</span>
-            </div>
-        </button>
-    <!--</form>-->
+            <!-- Messaggio h2 -->
+            <h2>Seleziona una tipologia di visita:</h2>
 
-    <!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
-        <button type="submit" name="servizio" id="den2" value="impianto" class="dashboard">
-            <div class="piece-all">
-                <img src="{{ url_for('static', filename='icone/dentista.png') }}"
-                     alt="Dentista" class="piece-image">
+            <!-- Invia la tua scelta alla schermata di prenotazione -->
+            <form action="{{ url_for('sceltadentist') }}" method="get">
+                <input type="hidden" name="deninput" id="deninput">
 
-                <div class="piece-info">
-                    <span class="piece-title">Impianto</span>
-                </div>
+                <!-- Pulsante per il tipo di visita Otturazione -->
+                <button type="submit" name="servizio" id="den1" value="otturazione" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/dentista.png') }}" alt="Dentista" class="piece-image">
 
-                <span class="piece-time">45 min</span>
-            </div>
-        </button>
-    <!--</form>-->
+                        <div class="piece-info">
+                            <span class="piece-title">Otturazione</span>
+                        </div>
 
-    <!--<form action="{{ url_for('sceltadentist') }}" method="get">-->
-        <button type="submit" name="servizio" id="den3" value="controllo" class="dashboard">
-            <div class="piece-all">
-                <img src="{{ url_for('static', filename='icone/dentista.png') }}"
-                     alt="Dentista" class="piece-image">
+                        <span class="piece-time">30 min</span>
+                    </div>
+                </button>
 
-                <div class="piece-info">
-                    <span class="piece-title">Controllo</span>
-                </div>
+                <!-- Pulsante per il tipo di visita Impianto -->
+                <button type="submit" name="servizio" id="den2" value="impianto" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/dentista.png') }}" alt="Dentista" class="piece-image">
 
-                <span class="piece-time">20 min</span>
-            </div>
-        </button>
-    </form>
-</div>
-<script>
+                        <div class="piece-info">
+                            <span class="piece-title">Impianto</span>
+                        </div>
 
+                        <span class="piece-time">45 min</span>
+                    </div>
+                </button>
 
-    const den1 = document.getElementById("den1");
-    const den2 = document.getElementById("den2");
-    const den3 = document.getElementById("den3");
-    //const hygInput = document.getElementById("hyg1input") || document.getElementById("hyg2input") || document.getElementById("hyg3input");
-    const denInput = document.getElementById("deninput")
+                <!-- Pulsante per il tipo di visita Controllo -->
+                <button type="submit" name="servizio" id="den3" value="controllo" class="dashboard">
+                    <div class="piece-all">
+                        <img src="{{ url_for('static', filename='icone/dentista.png') }}" alt="Dentista" class="piece-image">
 
-    den1.addEventListener("click", () => {
+                        <div class="piece-info">
+                            <span class="piece-title">Controllo</span>
+                        </div>
 
-        denInput.value = "Otturazione";
-    });
+                        <span class="piece-time">20 min</span>
+                    </div>
+                </button>
+            </form>
+        </div>
 
+        <script>
 
+            const den1 = document.getElementById("den1"); // costante referente del pulsante Otturazione
+            const den2 = document.getElementById("den2"); // costante referente del pulsante Impianto
+            const den3 = document.getElementById("den3"); // costante referente del pulsante Controllo
+            const denInput = document.getElementById("deninput") //costante che cambia in base al click apposito
 
-    den2.addEventListener("click", () => {
+            // se clicchi den1, allora il valore sarà Otturazione
+            den1.addEventListener("click", () => {
 
-        denInput.value = "Impianto";
-    });
+                denInput.value = "Otturazione";
+            });
 
+            // se clicchi den2, allora il valore sarà Impianto
+            den2.addEventListener("click", () => {
 
+                denInput.value = "Impianto";
+            });
 
-    den3.addEventListener("click", () => {
+            // se clicchi den3, allora il valore sarà Controllo
+            den3.addEventListener("click", () => {
 
-        denInput.value = "Controllo";
-    });
+                denInput.value = "Controllo";
+            });
 
-
-
-
-</script>
-
-</body>
+        </script>
+    </body>
 </html>

@@ -1,256 +1,261 @@
+<!-- Schermata per prenotare il chirurgo -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Scelta Chirurgo</title>
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='scelta.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
-</head>
+    <head>
 
-<style>
+        <meta charset="UTF-8">
+        <title>Scelta Chirurgo</title>
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='scelta.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='back.css') }}">
 
-    .nascosto{
-        display: none;
-    }
+    </head>
 
-</style>
+    <body>
 
-<body>
-
-<div class="back-div">
-    <form action="{{ url_for('surgeon') }}" method="get">
-        <button type="submit" class="back-btn">
-            <img
-                    src="{{ url_for('static', filename='icone/indietro_btn.png') }}"
-                    class="back-icon"
-                    alt="Indietro"
-            >
-        </button>
-    </form>
-</div>
-
-<div class="scelta-container">
-
-    <!-- COLONNA SINISTRA -->
-    <div class="scelte-left">
-
-        <!-- CHIRURGO -->
-        <div class="scelta-section">
-            <div class="scelta-title">Scegli il chirurgo</div>
-            <button type="button" id="luigi">Luigi</button>
-            <button type="button" id="domenico">Domenico</button>
+        <!-- Contenitore del pulsante undo -->
+        <div class="back-div">
+            <form action="{{ url_for('surgeon') }}" method="get">
+                <button type="submit" class="back-btn">
+                    <img src="{{ url_for('static', filename='icone/indietro_btn.png') }}" class="back-icon" alt="Indietro">
+                </button>
+            </form>
         </div>
 
-        <!-- GIORNO -->
-        <div class="scelta-section">
-            <div class="scelta-title">Scegli il giorno</div>
-            <button type="button" id="giornouno">Lunedì 9 Febbraio</button>
-            <button type="button" id="giornodue">Martedì 10 Febbraio</button>
-            <button type="button" id="giornotre">Mercoledì 11 Febbraio</button>
+        <!-- Container generale -->
+        <div class="scelta-container">
+
+            <!-- Colonna generale gestita alla sinistra dello schermo -->
+            <div class="scelte-left">
+
+                <!-- Contenitore del messaggio -->
+                <div class="scelta-section">
+                    <div class="scelta-title">Scegli il chirurgo</div>
+                    <button type="button" id="luigi">Luigi</button>
+                    <button type="button" id="domenico">Domenico</button>
+                </div>
+
+                <!-- Contenitore della selezione del giorno -->
+                <div class="scelta-section">
+                    <div class="scelta-title">Scegli il giorno</div>
+                    <button type="button" id="giornouno">Lunedì 9 Febbraio</button>
+                    <button type="button" id="giornodue">Martedì 10 Febbraio</button>
+                    <button type="button" id="giornotre">Mercoledì 11 Febbraio</button>
+                </div>
+
+                <!-- Contenitore della selezione dell'orario -->
+                <div class="scelta-section">
+                    <div class="scelta-title">Scegli l’orario</div>
+                    <button type="button" id="oresedici">16:00</button>
+                    <button type="button" id="orediciassette">17:00</button>
+                    <button type="button" id="orediciotto">18:00</button>
+                    <p id="no-orari" class="nascosto">Nessun orario disponibile!</p>
+                </div>
+
+            </div>
+
+            <!-- Colonna generale gestita alla destra dello schermo -->
+            <div class="conferma-wrapper">
+                <form action="{{ url_for('conferma') }}" method="get">
+                    <input type="hidden" name="scopo" id="scopoInput">
+                    <input type="hidden" name="matricola" id="matricola">
+                    <input type="hidden" name="giorno" id="giorno">
+                    <input type="hidden" name="ore" id="oreInput">
+
+                    <button type="submit" class="conferma">Conferma</button>
+                </form>
+            </div>
         </div>
 
-        <!-- ORARIO -->
-        <div class="scelta-section">
-            <div class="scelta-title">Scegli l’orario</div>
-            <button type="button" id="oresedici">16:00</button>
-            <button type="button" id="orediciassette">17:00</button>
-            <button type="button" id="orediciotto">18:00</button>
-            <p id="no-orari" class="nascosto">Nessun orario disponibile!</p>
-        </div>
+        <script>
 
-    </div>
+            const luigi = document.getElementById("luigi"); // costante referente del pulsante luigi
+            const domenico = document.getElementById("domenico"); // costante referente del pulsante domenico
+            const matricolaInput = document.getElementById("matricola"); //costante che cambia in base al click apposito
 
-    <!-- COLONNA DESTRA -->
-    <div class="conferma-wrapper">
-        <form action="{{ url_for('conferma') }}" method="get">
-            <input type="hidden" name="scopo" id="scopoInput">
-            <input type="hidden" name="matricola" id="matricola">
-            <input type="hidden" name="giorno" id="giorno">
-            <input type="hidden" name="ore" id="oreInput">
+            const giornouno = document.getElementById("giornouno"); // costante referente del pulsante giornouno
+            const giornodue = document.getElementById("giornodue"); // costante referente del pulsante giornodue
+            const giornotre = document.getElementById("giornotre"); // costante referente del pulsante giornotre
+            const giornoInput = document.getElementById("giorno"); //costante che cambia in base al click apposito
 
-            <button type="submit" class="conferma">Conferma</button>
-        </form>
-    </div>
+            const oresedici = document.getElementById("oresedici"); // costante referente delle oresedici
+            const orediciassette = document.getElementById("orediciassette"); // costante referente delle orediciassette
+            const orediciotto = document.getElementById("orediciotto"); // costante referente delle orediciotto
+            const oreInput = document.getElementById("oreInput"); //costante che cambia in base al click apposito
 
-</div>
+            const tipoVisita = "{{ surinput }}"; // costante referente del contenuto della variabile {{ surinput }}
+            document.getElementById("scopoInput").value = tipoVisita; //associa questa variabile come valore di scopoInput
 
-<script>
-    const luigi = document.getElementById("luigi");
-    const domenico = document.getElementById("domenico");
-    const matricolaInput = document.getElementById("matricola");
+            // se clicchi oresedici, allora attiva le 16:00
+            oresedici.addEventListener("click", () => {
+                oresedici.classList.add("selected");
+                orediciassette.classList.remove("selected");
+                orediciotto.classList.remove("selected");
+                oreInput.value = 16;
+            });
 
-    const giornouno = document.getElementById("giornouno");
-    const giornodue = document.getElementById("giornodue");
-    const giornotre = document.getElementById("giornotre");
-    const giornoInput = document.getElementById("giorno");
+            // se clicchi orediciassette, allora attiva le 17:00
+            orediciassette.addEventListener("click", () => {
+                oresedici.classList.remove("selected");
+                orediciassette.classList.add("selected");
+                orediciotto.classList.remove("selected");
+                oreInput.value = 17;
+            });
 
-    const oresedici = document.getElementById("oresedici");
-    const orediciassette = document.getElementById("orediciassette");
-    const orediciotto = document.getElementById("orediciotto");
-    const oreInput = document.getElementById("oreInput");
+            // se clicchi orediciotto, allora attiva le 18:00
+            orediciotto.addEventListener("click", () => {
+                oresedici.classList.remove("selected");
+                orediciassette.classList.remove("selected");
+                orediciotto.classList.add("selected");
+                oreInput.value = 18;
+            });
 
-    const tipoVisita = "{{ surinput }}";
-    document.getElementById("scopoInput").value = tipoVisita;
+            // se clicchi luigi, allora il medico sarà Luigi
+            luigi.addEventListener("click", () => {
+                luigi.classList.add("selected");
+                domenico.classList.remove("selected");
+                matricolaInput.value = "0124003056";
+            });
 
-    oresedici.addEventListener("click", () => {
-        oresedici.classList.add("selected");
-        orediciassette.classList.remove("selected");
-        orediciotto.classList.remove("selected");
-        oreInput.value = 16;
-    });
+            // se clicchi domenico, allora il medico sarà Domenico
+            domenico.addEventListener("click", () => {
+                domenico.classList.add("selected");
+                luigi.classList.remove("selected");
+                matricolaInput.value = "0124003024";
+            });
 
-    orediciassette.addEventListener("click", () => {
-        oresedici.classList.remove("selected");
-        orediciassette.classList.add("selected");
-        orediciotto.classList.remove("selected");
-        oreInput.value = 17;
-    });
+            // se clicchi giornouno, allora il valore sarà il Lunedì 9 Febbraio 2026
+            giornouno.addEventListener("click", () => {
+                let op = 0; // variabile che conta il numero di ore disponibili
+                document.getElementById("no-orari").classList.add("nascosto");
 
-    orediciotto.addEventListener("click", () => {
-        oresedici.classList.remove("selected");
-        orediciassette.classList.remove("selected");
-        orediciotto.classList.add("selected");
-        oreInput.value = 18;
-    });
+                giornouno.classList.add("selected");
+                giornodue.classList.remove("selected");
+                giornotre.classList.remove("selected");
+                giornoInput.value = "2026-02-09";
 
-    luigi.addEventListener("click", () => {
-        luigi.classList.add("selected");
-        domenico.classList.remove("selected");
-        matricolaInput.value = "0124003056";
-    });
+                // visualizza solo gli orari disponibili
+                fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.ok) return;
 
-    domenico.addEventListener("click", () => {
-        domenico.classList.add("selected");
-        luigi.classList.remove("selected");
-        matricolaInput.value = "0124003024";
-    });
+                        // reset
+                        oresedici.classList.add("hidden");
+                        orediciassette.classList.add("hidden");
+                        orediciotto.classList.add("hidden");
 
-    giornouno.addEventListener("click", () => {
-        let op = 0;
-        document.getElementById("no-orari").classList.add("nascosto");
+                        // mostra solo quelli disponibili
+                        if (data.ore_disponibili.includes(16)) {
+                            oresedici.classList.remove("hidden");
+                            op++;
+                        }
+                        if (data.ore_disponibili.includes(17)) {
+                            orediciassette.classList.remove("hidden");
+                            op++;
+                        }
+                        if (data.ore_disponibili.includes(18)) {
+                            orediciotto.classList.remove("hidden");
+                            op++;
+                        }
+                        if (op === 0) { // Nessun orario disponibile!
+                            document.getElementById("no-orari").classList.remove("nascosto");
+                        }
+                    })
+                    .catch(err => console.error(err));
+            });
 
-        giornouno.classList.add("selected");
-        giornodue.classList.remove("selected");
-        giornotre.classList.remove("selected");
-        giornoInput.value = "2026-02-09";
+            // se clicchi giornodue, allora il valore sarà il Martedì 10 Febbraio 2026
+            giornodue.addEventListener("click", () => {
+                let op = 0; // variabile che conta il numero di ore disponibili
+                document.getElementById("no-orari").classList.add("nascosto");
 
-        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
-            .then(res => res.json())
-            .then(data => {
-                if (!data.ok) return;
+                giornouno.classList.remove("selected");
+                giornodue.classList.add("selected");
+                giornotre.classList.remove("selected");
+                giornoInput.value = "2026-02-10";
 
-                // reset
-                oresedici.classList.add("hidden");
-                orediciassette.classList.add("hidden");
-                orediciotto.classList.add("hidden");
+                // visualizza solo gli orari disponibili
+                fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.ok) return;
 
-                // mostra solo quelli disponibili
-                if (data.ore_disponibili.includes(16)) {
-                    oresedici.classList.remove("hidden");
-                    op++;
+                        // reset
+                        oresedici.classList.add("hidden");
+                        orediciassette.classList.add("hidden");
+                        orediciotto.classList.add("hidden");
+
+                        // mostra solo quelli disponibili
+                        if (data.ore_disponibili.includes(16)) {
+                            oresedici.classList.remove("hidden");
+                            op++;
+                        }
+                        if (data.ore_disponibili.includes(17)) {
+                            orediciassette.classList.remove("hidden");
+                            op++;
+                        }
+                        if (data.ore_disponibili.includes(18)) {
+                            orediciotto.classList.remove("hidden");
+                            op++;
+                        }
+                        if (op === 0) { // Nessun orario disponibile!
+                            document.getElementById("no-orari").classList.remove("nascosto");
+                        }
+                    })
+                    .catch(err => console.error(err));
+            });
+
+            // se clicchi giornotre, allora il valore sarà il Mercoledì 11 Febbraio 2026
+            giornotre.addEventListener("click", () => {
+                let op = 0; // variabile che conta il numero di ore disponibili
+                document.getElementById("no-orari").classList.add("nascosto");
+
+                giornouno.classList.remove("selected");
+                giornodue.classList.remove("selected");
+                giornotre.classList.add("selected");
+                giornoInput.value = "2026-02-11";
+
+                // visualizza solo gli orari disponibili
+                fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (!data.ok) return;
+
+                        // reset
+                        oresedici.classList.add("hidden");
+                        orediciassette.classList.add("hidden");
+                        orediciotto.classList.add("hidden");
+
+                        // mostra solo quelli disponibili
+                        if (data.ore_disponibili.includes(16)) {
+                            oresedici.classList.remove("hidden");
+                            op++;
+                        }
+                        if (data.ore_disponibili.includes(17)) {
+                            orediciassette.classList.remove("hidden");
+                            op++;
+                        }
+                        if (data.ore_disponibili.includes(18)) {
+                            orediciotto.classList.remove("hidden");
+                            op++;
+                        }
+                        if (op === 0) { // Nessun orario disponibile!
+                            document.getElementById("no-orari").classList.remove("nascosto");
+                        }
+                    })
+                    .catch(err => console.error(err));
+            });
+
+            /* Puoi cliccare Conferma solo se hai selezionato sia il medico, che il giorno che l'ora */
+            document.querySelector(".conferma").addEventListener("click", (e) => {
+                if (!matricolaInput.value || !giornoInput.value || !oreInput.value) {
+                    e.preventDefault();
+                    alert("Seleziona chirurgo, giorno e ora prima di confermare");
                 }
-                if (data.ore_disponibili.includes(17)) {
-                    orediciassette.classList.remove("hidden");
-                    op++;
-                }
-                if (data.ore_disponibili.includes(18)) {
-                    orediciotto.classList.remove("hidden");
-                    op++;
-                }
-                if (op === 0) {
-                    document.getElementById("no-orari").classList.remove("nascosto");
-                }
-            })
-            .catch(err => console.error(err));
-    });
+            });
+        </script>
 
-    giornodue.addEventListener("click", () => {
-        let op = 0;
-        document.getElementById("no-orari").classList.add("nascosto");
-
-        giornouno.classList.remove("selected");
-        giornodue.classList.add("selected");
-        giornotre.classList.remove("selected");
-        giornoInput.value = "2026-02-10";
-
-        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
-            .then(res => res.json())
-            .then(data => {
-                if (!data.ok) return;
-
-                // reset
-                oresedici.classList.add("hidden");
-                orediciassette.classList.add("hidden");
-                orediciotto.classList.add("hidden");
-
-                // mostra solo quelli disponibili
-                if (data.ore_disponibili.includes(16)) {
-                    oresedici.classList.remove("hidden");
-                    op++;
-                }
-                if (data.ore_disponibili.includes(17)) {
-                    orediciassette.classList.remove("hidden");
-                    op++;
-                }
-                if (data.ore_disponibili.includes(18)) {
-                    orediciotto.classList.remove("hidden");
-                    op++;
-                }
-                if (op === 0) {
-                    document.getElementById("no-orari").classList.remove("nascosto");
-                }
-            })
-            .catch(err => console.error(err));
-    });
-
-    giornotre.addEventListener("click", () => {
-        let op = 0;
-        document.getElementById("no-orari").classList.add("nascosto");
-
-        giornouno.classList.remove("selected");
-        giornodue.classList.remove("selected");
-        giornotre.classList.add("selected");
-        giornoInput.value = "2026-02-11";
-
-        fetch(`/api/disponibilita-orari?matricola=${matricolaInput.value}&giorno=${giornoInput.value}`)
-            .then(res => res.json())
-            .then(data => {
-                if (!data.ok) return;
-
-                // reset
-                oresedici.classList.add("hidden");
-                orediciassette.classList.add("hidden");
-                orediciotto.classList.add("hidden");
-
-                // mostra solo quelli disponibili
-                if (data.ore_disponibili.includes(16)) {
-                    oresedici.classList.remove("hidden");
-                    op++;
-                }
-                if (data.ore_disponibili.includes(17)) {
-                    orediciassette.classList.remove("hidden");
-                    op++;
-                }
-                if (data.ore_disponibili.includes(18)) {
-                    orediciotto.classList.remove("hidden");
-                    op++;
-                }
-                if (op === 0) {
-                    document.getElementById("no-orari").classList.remove("nascosto");
-                }
-            })
-            .catch(err => console.error(err));
-    });
-
-    document.querySelector(".conferma").addEventListener("click", (e) => {
-        if (!matricolaInput.value || !giornoInput.value || !oreInput.value) {
-            e.preventDefault();
-            alert("Seleziona chirurgo, giorno e ora prima di confermare");
-        }
-    });
-</script>
-
-</body>
+    </body>
 </html>

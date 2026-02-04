@@ -1,8 +1,8 @@
-/* ===== SERVICE WORKER ===== */
+/* Programma del Service Worker */
 
 const CACHE_NAME = 'briacerbe-dental-v1';
 
-/* FILE STATICI DA METTERE IN CACHE */
+/* file statici da mettere in cache */
 const filesToCache = [
 
     /* HTML */
@@ -60,7 +60,7 @@ const filesToCache = [
     '/static/manifest.json'
 ];
 
-/* ===== INSTALL ===== */
+/* installa la cache */
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -71,7 +71,7 @@ self.addEventListener('install', event => {
     );
 });
 
-/* ===== ACTIVATE (pulizia vecchie cache) ===== */
+/* attiva la pulizia della vecchia cache */
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
@@ -87,7 +87,7 @@ self.addEventListener('activate', event => {
     );
 });
 
-/* ===== FETCH ===== */
+/* fetcha la cache */
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)

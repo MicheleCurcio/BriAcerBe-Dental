@@ -1,112 +1,89 @@
+<!-- Schermata della Prenotazione -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Prenotazioni</title>
-    <meta charset="UTF-8">
-    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bottom.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='prenotazioni.css') }}">
+    <head>
 
+        <title>Prenotazioni</title>
+        <meta charset="UTF-8">
+        <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='bottom.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='prenotazioni.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- per gestire le grandezze-->
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- per gestire le grandezze-->
+    </head>
 
-</head>
+    <body>
 
-<style>
-
-    .empty-state {
-        height: calc(100vh - 80px); /* lascia spazio alla bottom bar */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.1rem;
-        color: #888;
-        text-align: center;
-    }
-
-    .empty-state p {
-        opacity: 0.8;
-    }
-
-</style>
-<body>
-    {% if prenotazioni|length == 0 %}
-    <div class="empty-state">
-        <p>Nessuna prenotazione</p>
-    </div>
-    {% else %}
-    <ul class="prenotazioni-list">
-        {% for p in prenotazioni %}
-        <li class="prenotazione-card">
-
-            <div class="prenotazione-row titolo">
-                {{ p.scopo }}
+        {% if prenotazioni|length == 0 %} <!-- Se l'utente non ha prenotazioni -->
+            <div class="empty-state">
+                <p>Nessuna prenotazione</p>
             </div>
+        {% else %} <!-- Altrimenti -->
+            <ul class="prenotazioni-list">
+                {% for p in prenotazioni %} <!-- per ogni prenotazione registrata, visualizzane i campi -->
+                    <li class="prenotazione-card"> <!-- lista della prenotazione associata al ciclo for -->
 
-            <div class="prenotazione-row">
-                <span class="label">Giorno:</span>
-                <span class="value">{{ p.data_visita | data_it }}</span>
-            </div>
+                        <div class="prenotazione-row titolo">
+                            {{ p.scopo }}
+                        </div>
 
-            <div class="prenotazione-row">
-                <span class="label">Orario:</span>
-                <span class="value">{{ "%02d:00"|format(p.ora_visita) }}</span>
-            </div>
+                        <div class="prenotazione-row">
+                            <span class="label">Giorno:</span>
+                            <span class="value">{{ p.data_visita | data_it }}</span>
+                        </div>
 
-            <div class="prenotazione-row">
-                <span class="label">Medico:</span>
-                <span class="value">
-                    {% if p.matricola == "0124002974" %}
-                        Antonio
-                    {% elif p.matricola == "0124002966" %}
-                        Michele
-                    {% elif p.matricola == "0124003081" %}
-                        Salvatore
-                    {% elif p.matricola == "0124002915" %}
-                        Gaetano
-                    {% elif p.matricola == "0124003056" %}
-                        Luigi
-                    {% elif p.matricola == "0124003024" %}
-                        Domenico
-                    {% else %}
-                        Sconosciuto
-                    {% endif %}
-                </span>
-            </div>
+                        <div class="prenotazione-row">
+                            <span class="label">Orario:</span>
+                            <span class="value">{{ "%02d:00"|format(p.ora_visita) }}</span>
+                        </div>
 
-            <!-- Pulsante cestino -->
-            <div class="cestino-wrapper">
-                <form action="{{ url_for('cancella') }}" method="post">
-                    <!-- essendo un for, meglio passare giorno e ora in questo modo senza aiuto del JS -->
-                    <input type="hidden" name="giorno" value="{{ p.data_visita }}">
-                    <input type="hidden" name="ore" value="{{ p.ora_visita }}">
-                    <button class="delete-btn">
-                        Cancella prenotazione
-                    </button>
-                </form>
-            </div>
+                        <div class="prenotazione-row">
+                            <span class="label">Medico:</span>
+                            <span class="value">
+                                <!-- Selezionami il medico associato alla matricola -->
+                                {% if p.matricola == "0124002974" %}
+                                    Antonio
+                                {% elif p.matricola == "0124002966" %}
+                                    Michele
+                                {% elif p.matricola == "0124003081" %}
+                                    Salvatore
+                                {% elif p.matricola == "0124002915" %}
+                                    Gaetano
+                                {% elif p.matricola == "0124003056" %}
+                                    Luigi
+                                {% elif p.matricola == "0124003024" %}
+                                    Domenico
+                                {% else %}
+                                    Sconosciuto
+                                {% endif %}
+                            </span>
+                        </div>
 
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+                        <!-- Pulsante cestino -->
+                        <div class="cestino-wrapper">
+                            <form action="{{ url_for('cancella') }}" method="post">
+                                <!-- essendo un for, meglio passare giorno e ora in questo modo senza aiuto del JS -->
+                                <input type="hidden" name="giorno" value="{{ p.data_visita }}">
+                                <input type="hidden" name="ore" value="{{ p.ora_visita }}">
+                                <button class="delete-btn">
+                                    Cancella prenotazione
+                                </button>
+                            </form>
+                        </div>
 
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
+        <!-- Includi la componente bottom in basso allo schermo -->
+        {% include 'components/bottom.html' %}
 
+        <script>
 
-{% include 'components/bottom.html' %}
+            const giornoInput = document.getElementById("giorno");
+            const oreInput = document.getElementById("oreInput");
 
-
-<script>
-
-    const giornoInput = document.getElementById("giorno");
-    const oreInput = document.getElementById("oreInput");
-
-
-
-</script>
-
-
-
-</body>
+        </script>
+    </body>
 </html>

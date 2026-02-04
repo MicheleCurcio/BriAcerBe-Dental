@@ -1,120 +1,49 @@
-
-/*fatto con michele precedentemente*/
-/*.glass-effect {*/
-/*    background: rgba(255, 125, 158, 0.1);      !* Trasparenza bianca *!*/
-/*    backdrop-filter: blur(70px);               !* Sfocatura dietro *!*/
-/*    -webkit-backdrop-filter: blur(50px);       !* Safari *!*/
-/*    border: 1px solid rgba(255, 255, 255, 0.2); !* Bordo luminoso *!*/
-/*    border-radius: 16px;                       !* Angoli arrotondati *!*/
-/*    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); !* Ombra profonda *!*/
-/*}*/
-
-/*.bottom {*/
-/*    position: fixed;*/
-/*    bottom: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    background-color: black;*/
-/*    height: 100px;*/
-/*    display: grid;*/
-/*    grid-template-columns: 33.3% 33.3% 33.3% ;*/
-/*}*/
-
-/*body{*/
-/*    background-color:lightslategrey;*/
-/*}*/
-
-/*.home, .prenotazioni, .servizi, .info, .spazio {*/
-/*    background-color: white;*/
-/*    height: 100px;*/
-/*    color: white;*/
-/*    text-align: center;*/
-/*}*/
-
-/*.home-form, .prenotazioni-form, .servizi-form, .info-form{*/
-/*    height: 100%;*/
-/*}*/
-
-/*.nextbtn {*/
-/*    background-color: lightseagreen;*/
-/*    color: white;*/
-/*    font-size: 15px;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    !* padding: 32px; *!*/
-/*    border: none;*/
-/*    border-radius: 5px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*.nextbtn:hover {*/
-/*    background-color: lightblue;*/
-/*}*/
-
-
-/* =========================
-   BASE
-========================= */
-
+/* CSS dell'hyml e del body */
 html, body {
     margin: 0;
     padding: 0;
 }
 
-/* =========================
-   BOTTOM BAR CONTAINER
-========================= */
-
+/* gestione del pulsante */
 .bottom {
     position: fixed;
-    bottom: 12px;
+    bottom: 0.75rem; /* 12px / 16 */
     left: 50%;
     transform: translateX(-50%);
 
-    width: calc(100% - 24px);
-    max-width: 900px;
-    height: 80px;
+    width: calc(100% - 1.5rem); /* 24px / 16 */
+    max-width: 56.25rem; /* 900px /16 */
+    height: 5rem; /* 80px /16 */
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* definisce 3 colonne uguali con la stessa frazione di spazio */
 
     background-color: rgb(176, 216, 203);
-    border-radius: 24px;
+    border-radius: 1.5rem; /* 24px /16 */
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    z-index: 100;
+    /* gestione delle ombre del pulsante */
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.25); /* 10px 30px /16 */
+    z-index: 100; /* metti il pulsante sopra altri elementi */
 }
 
-/* =========================
-   SEZIONI INTERNE
-========================= */
-
+/* sezioni esterne */
 .home,
 .prenotazioni,
-.servizi,
-.info,
-.spazio {
+.info {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* =========================
-   FORM
-========================= */
-
+/* sezioni esterne */
 .home-form,
 .prenotazioni-form,
-.servizi-form,
 .info-form {
     width: 100%;
     height: 100%;
 }
 
-/* =========================
-   BOTTONI
-========================= */
-
+/* gestione del pulsante */
 .nextbtn {
     background: transparent;
     border: none;
@@ -130,65 +59,41 @@ html, body {
     color: white;
     cursor: pointer;
 
-    border-radius: 18px;
+    border-radius: 1.125rem; /* 18px /16 */
     transition: background-color 0.2s ease;
 }
 
+/* gestione del pulsante quando ci passi sopra */
 .nextbtn:hover {
     background-color: rgba(255, 255, 255, 0.18);
 }
 
-/* =========================
-   ICONE
-========================= */
-
+/* gestione delle immagini dei pulsanti */
 .bottom img {
-    width: clamp(30px, 8vw, 48px);;
+    width: clamp(1.875rem, 8vw, 3rem); /* 30px /16 → 48px /16 */
     height: auto;
     object-fit: contain;
-    margin-bottom: 4px;
+    margin-bottom: 0.25rem; /* 4px /16 */
     background: transparent;
 }
 
-/* =========================
-   TESTO SOTTO ICONE
-========================= */
-
+/* gestione del testo sotto le immagini */
 .bottom span {
-    font-size: clamp(13px, 3.5vw, 16px); /* più grande */
-    font-weight: 650;                   /* grassetto */
+    font-size: clamp(0.8125rem, 3.5vw, 1rem); /* 13px /16 → 16px /16 */
+    font-weight: 650; /* grassetto */
     line-height: 1.1;
 
-
-    margin-top: -2px;                    /* lo avvicina all’icona */
+    margin-top: -0.125rem; /* -2px /16 */
     display: block;
     text-align: center;
 }
 
-/* =========================
-   EFFETTO GLASS (OPZIONALE)
-   se vuoi attivarlo, sostituisci
-   background-color della .bottom
-========================= */
-
-/*
-.bottom {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-*/
-
-/* =========================
-   MIGLIORAMENTO VISIBILITÀ TESTO TAB BAR
-   (AGGIUNTA, NON MODIFICA)
-========================= */
-
+/* miglioramento della visibilità sul testo della tab bar */
 .bottom span {
     color: #1f3d36; /* più contrasto sul verde */
     text-shadow:
-            0 1px 3px rgba(255, 255, 255, 0.6),
-            0 2px 6px rgba(0, 0, 0, 0.25);
+            0 0.0625rem 0.1875rem rgba(255, 255, 255, 0.6), /* 1px 3px /16 */
+            0 0.125rem 0.375rem rgba(0, 0, 0, 0.25); /* 2px 6px /16 */
 }
 
 /* stato attivo più evidente */

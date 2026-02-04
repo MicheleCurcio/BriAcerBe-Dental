@@ -1,45 +1,47 @@
+<!-- Schermata di conferma a seconda che la prenotazione vada a buon fine oppure no -->
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <title>Conferma</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='conferma.css') }}">
-</head>
-<body>
 
-<div class="confirm-card">
+    <head>
+        <meta charset="UTF-8">
+        <title>Conferma</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='conferma.css') }}">
+    </head>
 
-    {% if errore %}
+    <body>
 
-        <div class="alert">{{ errore }}</div>
-        <form action="{{ url_for('prenotazioni') }}" method="get">
-            <br><br>
-            <button type="submit" class="prenotazioni-button">
-                Visualizza le tue prenotazioni
-            </button>
-        </form>
+        <!-- Contenitore della prenotazione -->
+        <div class="confirm-card">
+            {% if errore %} <!-- Se la prenotazione dovesse andare a buon fine, lancia un alert -->
+                <div class="alert">
+                    {{ errore }}
+                </div>
+                <form action="{{ url_for('prenotazioni') }}" method="get">
+                    <br><br>
+                    <button type="submit" class="prenotazioni-button">
+                        Visualizza le tue prenotazioni
+                    </button>
+                </form>
+            {% else %} <!-- Altrimenti, la prenotazione è andata a buon fine e puoi tornare alla home -->
+                <div class="confirm-icon">
+                    ✓
+                </div>
 
-    {% else %}
+                <div class="confirm-title">
+                    Prenotazione confermata
+                </div>
 
-        <div class="confirm-icon">✓</div>
+                <div class="confirm-text">
+                    La tua prenotazione è stata registrata correttamente.
+                </div>
 
-        <div class="confirm-title">
-            Prenotazione confermata
+                <form action="{{ url_for('home') }}" method="get">
+                    <button type="submit" class="home-button">
+                        Torna alla home
+                    </button>
+                </form>
+            {% endif %}
         </div>
 
-        <div class="confirm-text">
-            La tua prenotazione è stata registrata correttamente.
-        </div>
-
-        <form action="{{ url_for('home') }}" method="get">
-            <button type="submit" class="home-button">
-                Torna alla home
-            </button>
-        </form>
-
-    {% endif %}
-
-</div>
-
-</body>
+    </body>
 </html>
