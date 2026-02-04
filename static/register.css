@@ -168,3 +168,8 @@ button:active {
     margin: 0;
     accent-color: lightseagreen;
 }
+
+.alert{
+    color: red;
+    text-align: right;
+}

@@ -111,28 +111,31 @@ def register():
         confermapassword = request.form['confermapassword']
 
         # se i dati sono coerenti, registra il paziente nel database
-        if password == confermapassword and data_di_nascita <= date.today():
-            password_hash = generate_password_hash(password)
+        if password == confermapassword:
+            if data_di_nascita <= date.today():
+                password_hash = generate_password_hash(password)
 
-            nuovo_paziente = Paziente(
-                username=username,
-                nome=nome,
-                cognome=cognome,
-                data_di_nascita=data_di_nascita,
-                sesso=sesso,
-                n_telefono=n_telefono,
-                password_hash=password_hash
-            )
+                nuovo_paziente = Paziente(
+                    username=username,
+                    nome=nome,
+                    cognome=cognome,
+                    data_di_nascita=data_di_nascita,
+                    sesso=sesso,
+                    n_telefono=n_telefono,
+                    password_hash=password_hash
+                )
 
-            try:
-                db.session.add(nuovo_paziente)
-                db.session.commit()
-                return render_template('index.html')
-            except:
-                db.session.rollback()
-                return redirect(url_for("register"))
-
-        return render_template("register.html", errore="Password non identiche")
+                try:
+                    db.session.add(nuovo_paziente)
+                    db.session.commit()
+                    return render_template('index.html')
+                except:
+                    db.session.rollback()
+                    return redirect(url_for("register"))
+            else:
+                return render_template("register.html", errore_data="Non puoi nascere nel futuro!")
+        else:
+            return render_template("register.html", errore_pass="Password non identiche!")
 
     return render_template('register.html')
 

@@ -8,6 +8,12 @@ body {
     /*background-color: brown;*/
     margin: 0;
     min-height: 100vh;
+
+    /* sfondo comune */
+    background-image: url("/static/icone/sfondo_appuntamento.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 /* contenitore generale */
@@ -22,11 +28,7 @@ body {
     /* spazio tra i pezzi */
     gap: 1.75rem; /* 28px /16 */
 
-    /* sfondo comune */
-    background-image: url("/static/icone/sfondo_appuntamento.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+
 }
 
 /* gestione del form */
