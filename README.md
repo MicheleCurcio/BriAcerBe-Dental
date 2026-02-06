@@ -25,3 +25,5 @@ Moro Salvatore - https://www.falsesitemorosalvatore.it
 
 
 **Teching material:** https://github.com/MicheleCurcio/BriAcerBe-Dental.git (Good Job! The repository is public)
+
+**Link presentation:** https://www.canva.com/design/DAG4elKbFAo/Ddw6m4wxsn1KXF-nDkgfaw/edit?utm_content=DAG4elKbFAo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
